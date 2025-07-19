@@ -1,50 +1,10 @@
-# 🍽️ iFood Benefícios - Projeto Local
+# 🍽️ iFood Benefícios
 
-Este projeto é uma aplicação web que simula uma plataforma de avaliação de restaurantes parceiros do iFood com sistema de recompensas.
+Uma aplicação web que simula uma plataforma de avaliação de restaurantes parceiros do iFood com sistema de recompensas.
 
-## 🚀 Como Rodar o Projeto
+## 🌐 Demo Online
 
-### Opção 1: Script Automático (Recomendado)
-```bash
-./start.sh
-```
-
-### Opção 2: Servidor Python Direto
-```bash
-python3 server.py
-```
-
-### Opção 3: Comando Manual
-```bash
-cd public && python3 -m http.server 3000
-```
-
-## 📋 Rotas Disponíveis
-
-Após iniciar o servidor, você pode acessar:
-
-- **🏠 Home**: http://localhost:3000/
-- **📊 Dashboard**: http://localhost:3000/dashboard
-- **💰 Saque**: http://localhost:3000/saque  
-- **🔓 Desbloqueio**: http://localhost:3000/desbloqueio
-
-## 🛠️ Estrutura do Projeto
-
-```
-├── public/                 # Arquivos estáticos servidos
-│   ├── index.html         # Página inicial
-│   ├── css/               # Estilos CSS
-│   ├── js/                # Scripts JavaScript
-│   ├── images/            # Imagens e assets
-│   ├── fonts/             # Fontes customizadas
-│   ├── dashboard/         # Página do dashboard
-│   ├── saque/             # Página de saque
-│   └── desbloqueio/       # Página de desbloqueio
-├── docs/                  # Documentação do projeto
-├── server.py              # Servidor HTTP customizado
-├── start.sh               # Script de inicialização
-└── README.md              # Este arquivo
-```
+**Acesse**: https://ifood-02.vercel.app/
 
 ## 🎯 Funcionalidades
 
@@ -56,13 +16,38 @@ Após iniciar o servidor, você pode acessar:
 - ✅ Animações e feedback visual
 - ✅ Sistema de navegação completo
 
-## 🔧 Tecnologias Utilizadas
+## 📋 Páginas Disponíveis
+
+- **🏠 Home**: [/](https://ifood-02.vercel.app/)
+- **📊 Dashboard**: [/dashboard](https://ifood-02.vercel.app/dashboard)
+- **💰 Saque**: [/saque](https://ifood-02.vercel.app/saque)
+- **🔓 Desbloqueio**: [/desbloqueio](https://ifood-02.vercel.app/desbloqueio)
+- **❓ FAQ**: [/faq](https://ifood-02.vercel.app/faq)
+
+## 🚀 Execução Local
+
+### Opção 1: Script Automático
+```bash
+./start.sh
+```
+
+### Opção 2: Servidor Python
+```bash
+python3 server.py
+```
+
+### Opção 3: Servidor HTTP Simples
+```bash
+cd public && python3 -m http.server 3000
+```
+
+## 🔧 Tecnologias
 
 - **Frontend**: HTML5, CSS3, JavaScript
-- **Styling**: CSS customizado com design system
+- **Styling**: CSS customizado
 - **Fonts**: Inter (Google Fonts)
-- **Icons**: SVG customizados
-- **Servidor**: Python HTTP Server
+- **Deploy**: Vercel
+- **Servidor Local**: Python HTTP Server
 
 ## 📱 Compatibilidade
 
@@ -70,9 +55,25 @@ Após iniciar o servidor, você pode acessar:
 - ✅ Mobile (iOS Safari, Android Chrome)
 - ✅ Tablets
 
-## 🚦 Status do Projeto
+## 🛠️ Estrutura
 
-🟢 **Pronto para uso** - Todas as funcionalidades principais implementadas
+```
+public/
+├── index.html              # Página inicial
+├── dashboard/              # Dashboard de avaliações
+├── saque/                  # Página de saque
+├── desbloqueio/           # Página de desbloqueio
+├── faq/                   # FAQ
+├── css/                   # Estilos
+├── js/                    # Scripts
+├── images/                # Imagens
+├── fonts/                 # Fontes
+└── sounds/                # Efeitos sonoros
+```
+
+## 🚦 Status
+
+🟢 **Projeto Ativo** - Todas as funcionalidades implementadas
 
 ---
 

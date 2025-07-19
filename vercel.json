@@ -1,65 +1,55 @@
 {
   "version": 2,
-  "public": true,
-  "github": {
-    "silent": true
-  },
-  "rewrites": [
+  "builds": [
     {
-      "source": "/dashboard/(.*)",
-      "destination": "/public/dashboard/$1"
+      "src": "public/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/",
+      "dest": "/public/index.html"
     },
     {
-      "source": "/saque/(.*)",
-      "destination": "/public/saque/$1"
+      "src": "/dashboard",
+      "dest": "/public/dashboard/index.html"
     },
     {
-      "source": "/desbloqueio/(.*)",
-      "destination": "/public/desbloqueio/$1"
+      "src": "/saque",
+      "dest": "/public/saque/index.html"
     },
     {
-      "source": "/faq/(.*)",
-      "destination": "/public/faq/$1"
+      "src": "/desbloqueio",
+      "dest": "/public/desbloqueio/index.html"
     },
     {
-      "source": "/css/(.*)",
-      "destination": "/public/css/$1"
+      "src": "/faq",
+      "dest": "/public/faq/index.html"
     },
     {
-      "source": "/js/(.*)",
-      "destination": "/public/js/$1"
+      "src": "/css/(.*)",
+      "dest": "/public/css/$1"
     },
     {
-      "source": "/images/(.*)",
-      "destination": "/public/images/$1"
+      "src": "/js/(.*)",
+      "dest": "/public/js/$1"
     },
     {
-      "source": "/fonts/(.*)",
-      "destination": "/public/fonts/$1"
+      "src": "/images/(.*)",
+      "dest": "/public/images/$1"
     },
     {
-      "source": "/sounds/(.*)",
-      "destination": "/public/sounds/$1"
+      "src": "/fonts/(.*)",
+      "dest": "/public/fonts/$1"
     },
     {
-      "source": "/",
-      "destination": "/public/index.html"
+      "src": "/sounds/(.*)",
+      "dest": "/public/sounds/$1"
     },
     {
-      "source": "/dashboard",
-      "destination": "/public/dashboard/index.html"
-    },
-    {
-      "source": "/saque",
-      "destination": "/public/saque/index.html"
-    },
-    {
-      "source": "/desbloqueio",
-      "destination": "/public/desbloqueio/index.html"
-    },
-    {
-      "source": "/faq",
-      "destination": "/public/faq/index.html"
+      "src": "/(.*)",
+      "dest": "/public/$1"
     }
   ]
 }
