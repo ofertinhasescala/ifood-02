@@ -56,8 +56,18 @@
         }
 
         .logo {
-            height: 32px;
-            border-radius: 8px;
+            height: 40px;
+            width: auto;
+            max-width: 120px;
+            object-fit: contain;
+        }
+
+        /* Responsividade para telas menores */
+        @media (max-width: 480px) {
+            .logo {
+                height: 36px;
+                max-width: 100px;
+            }
         }
 
         .balance {
@@ -160,29 +170,7 @@
             text-align: center;
         }
 
-        /* Otimização mobile - espaçamento reduzido */
-        @media (max-width: 768px) {
-            .question {
-                margin-bottom: 16px;
-            }
 
-            .question-title {
-                font-size: 16px;
-                margin-bottom: 12px;
-            }
-
-            .card-content {
-                padding: 16px;
-            }
-
-            .rating-buttons {
-                margin-bottom: 16px;
-            }
-
-            .choice-buttons {
-                margin-bottom: 16px;
-            }
-        }
 
         .rating-buttons {
             display: flex;
@@ -318,7 +306,14 @@
         }
 
         .hidden {
-            display: none;
+            display: none !important;
+        }
+
+        /* Garantir que o modal nunca apareça no carregamento */
+        .modal-overlay.hidden {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
         }
 
         .success-message {
@@ -327,6 +322,110 @@
             color: #EB2834;
             font-size: 18px;
             font-weight: 600;
+        }
+
+        /* Modal de limite diário */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px) scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .modal-header {
+            text-align: center;
+            padding: 30px 30px 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .lock-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .modal-header h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+            margin: 0;
+        }
+
+        .modal-body {
+            padding: 30px;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        .modal-body p {
+            margin-bottom: 16px;
+            color: #666;
+            font-size: 16px;
+        }
+
+        .modal-body strong {
+            color: #EB2834;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .modal-footer {
+            padding: 0 30px 30px;
+        }
+
+        .redeem-btn {
+            width: 100%;
+            padding: 18px;
+            background: #EB2834;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .redeem-btn:hover {
+            background: #d91e2a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(235, 40, 52, 0.3);
+        }
+
+        .redeem-btn:active {
+            transform: translateY(0);
         }
 
         /* Animações */
@@ -354,13 +453,15 @@
             transform: translate(-50%, -50%);
             z-index: 9999;
             background: white;
-            padding: 32px;
+            padding: 40px 48px;
             border-radius: 20px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
             text-align: center;
             pointer-events: none;
             opacity: 0;
             animation: moneyPopup 2.5s ease-in-out forwards;
+            min-width: 280px;
+            max-width: 350px;
         }
 
         @keyframes moneyPopup {
@@ -388,16 +489,20 @@
         .money-icon {
             width: 80px;
             height: 80px;
-            background: #4CAF50;
+            background: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 16px;
-            font-size: 32px;
-            color: white;
-            font-weight: bold;
             animation: iconBounce 2.5s ease-in-out;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .money-icon img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
         }
 
         @keyframes iconBounce {
@@ -430,11 +535,13 @@
         }
 
         .money-amount {
-            font-size: 32px;
+            font-size: 36px;
             font-weight: 700;
             color: #4CAF50;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
             animation: textGlow 2.5s ease-in-out;
+            line-height: 1.2;
+            letter-spacing: -0.5px;
         }
 
         @keyframes textGlow {
@@ -450,9 +557,11 @@
         }
 
         .money-text {
-            font-size: 16px;
+            font-size: 18px;
             color: #666;
             font-weight: 500;
+            line-height: 1.4;
+            margin-top: 4px;
         }
 
         .money-overlay {
@@ -522,7 +631,7 @@
 <body>
     <!-- Header -->
     <div class="header">
-        <img src="../images/ifood-creditos-logo.jpeg" alt="iFood Benefícios" class="logo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/IFood_logo.svg/1200px-IFood_logo.svg.png" alt="iFood" class="logo">
         <div class="balance" id="balance">R$ 100,00</div>
     </div>
 
@@ -723,12 +832,32 @@
             </div>
         </div>
 
-        <!-- Mensagem de conclusão -->
+        <!-- Modal de limite diário atingido -->
+        <div class="modal-overlay hidden" id="daily-limit-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="lock-icon">🔒</div>
+                    <h2>Limite diário atingido!</h2>
+                </div>
+                <div class="modal-body">
+                    <p>Parabéns! Você completou todas as avaliações disponíveis hoje.</p>
+                    <p>Seu saldo atual é de <strong id="modal-balance">R$ 250,00</strong></p>
+                    <p>Agora você pode transformar esse saldo em créditos na sua conta do iFood!</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="redeem-btn" onclick="redirectToBalance()">
+                        🎁 Resgatar saldo
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mensagem de conclusão (backup) -->
         <div class="card hidden" id="completion-message">
             <div class="success-message">
                 🎉 Parabéns!<br>
                 Você avaliou todos os restaurantes!<br>
-                Saldo total: <span id="final-balance">R$ 200,00</span>
+                Saldo total: <span id="final-balance">R$ 100,00</span>
             </div>
         </div>
     </div>
@@ -757,18 +886,189 @@
     </audio>
 
     <script>
-        let currentBalance = 100; // Saldo inicial de R$ 100,00
+        // FORÇAR FECHAMENTO DO MODAL IMEDIATAMENTE
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('=== FORÇANDO FECHAMENTO DO MODAL ===');
+            const modal = document.getElementById('daily-limit-modal');
+            if (modal) {
+                modal.classList.add('hidden');
+                modal.style.display = 'none';
+                modal.style.visibility = 'hidden';
+                modal.style.opacity = '0';
+                document.body.style.overflow = 'auto';
+                console.log('Modal forçadamente fechado');
+            }
+            
+            // LIMPAR DADOS RESIDUAIS PARA TESTE
+            // localStorage.clear(); // Descomente esta linha se quiser limpar tudo para teste
+        });
+
+        let currentBalance = 65.91; // Saldo inicial quebrado
         let completedEvaluations = 0;
         let currentRestaurantIndex = 0;
         const restaurants = ['McDonalds', 'BurgerKing', 'Subway', 'Outback', 'PizzaHut'];
+        const targetFinalBalance = 250.00; // Saldo final desejado
+        let questionRewards = []; // Array para armazenar os valores de cada pergunta
+        let currentQuestionReward = 0; // Valor da pergunta atual
 
         // Dados das avaliações
         const evaluationData = {};
 
+        // Função para gerar valores quebrados que somam exatamente R$ 250,00
+        function generateRandomRewards(initialBalance) {
+            const finalBalance = 250.00;
+            const totalToAdd = finalBalance - initialBalance;
+            
+            // Gerar 4 valores aleatórios
+            const rewards = [];
+            let sum = 0;
+            
+            // Calcular faixa de valores para cada pergunta
+            const minPerQuestion = Math.max(10, totalToAdd / 8); // Mínimo 10 reais
+            const maxPerQuestion = Math.min(60, totalToAdd / 3); // Máximo 60 reais
+            
+            for (let i = 0; i < 4; i++) {
+                // Gerar valor aleatório dentro da faixa
+                const baseValue = Math.random() * (maxPerQuestion - minPerQuestion) + minPerQuestion;
+                const randomValue = Math.floor(baseValue * 100) / 100; // Arredondar para 2 casas decimais
+                rewards.push(randomValue);
+                sum += randomValue;
+            }
+            
+            // O último valor é calculado para que a soma seja exata
+            const lastValue = Math.round((totalToAdd - sum) * 100) / 100;
+            
+            // Verificar se o último valor é positivo e razoável
+            if (lastValue > 0 && lastValue <= maxPerQuestion) {
+                rewards.push(lastValue);
+            } else {
+                // Se o último valor não é bom, redistribuir os valores
+                const avgValue = totalToAdd / 5;
+                rewards.length = 0; // Limpar array
+                sum = 0;
+                
+                for (let i = 0; i < 4; i++) {
+                    const variation = (Math.random() - 0.5) * avgValue * 0.4; // Variação de até 20%
+                    const value = Math.floor((avgValue + variation) * 100) / 100;
+                    rewards.push(value);
+                    sum += value;
+                }
+                
+                // Último valor para completar exatamente
+                const finalValue = Math.round((totalToAdd - sum) * 100) / 100;
+                rewards.push(finalValue);
+            }
+            
+            // Embaralhar os valores para que não seja sempre o último que é diferente
+            for (let i = rewards.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [rewards[i], rewards[j]] = [rewards[j], rewards[i]];
+            }
+            
+            return rewards;
+        }
+
+        // Função para gerar saldo inicial aleatório (sempre quebrado)
+        function generateInitialBalance() {
+            // Gerar valor entre 50.00 e 80.00 com centavos aleatórios
+            const baseValue = Math.random() * 30 + 50; // Entre 50 e 80
+            return Math.floor(baseValue * 100) / 100; // Arredondar para 2 casas decimais
+        }
+
+        // Função para atualizar badges de recompensa
+        function updateRewardBadges() {
+            const badges = document.querySelectorAll('.reward-badge');
+            badges.forEach((badge, index) => {
+                if (questionRewards[index]) {
+                    badge.textContent = `Responda e ganhe R$ ${questionRewards[index].toFixed(2)}!`;
+                }
+            });
+        }
+
+        // Função para resetar interface para novo usuário
+        function resetInterfaceForNewUser() {
+            // Fechar modal se estiver aberto
+            const modal = document.getElementById('daily-limit-modal');
+            if (modal) {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
+            
+            // Mostrar apenas o primeiro restaurante
+            document.querySelectorAll('.restaurant-card').forEach((card, index) => {
+                if (index === 0) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+            
+            // Resetar seleções de botões
+            document.querySelectorAll('.rating-btn, .choice-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            
+            // Resetar botões de submit
+            document.querySelectorAll('.submit-btn').forEach(btn => {
+                btn.textContent = 'Enviar respostas';
+                btn.disabled = false;
+            });
+        }
+
+        // Função para simular login (para teste)
+        function simulateLogin() {
+            const email = prompt('Digite seu email para fazer login:');
+            if (email && email.trim()) {
+                localStorage.setItem('userEmail', email.trim().toLowerCase());
+                location.reload(); // Recarregar página para aplicar mudanças
+            }
+        }
+
         // Event listeners para os botões
         document.addEventListener('DOMContentLoaded', function () {
+            // DUPLA VERIFICAÇÃO: Garantir que o modal esteja fechado
+            const modal = document.getElementById('daily-limit-modal');
+            if (modal) {
+                modal.classList.add('hidden');
+                modal.style.display = 'none';
+                modal.style.visibility = 'hidden';
+                modal.style.opacity = '0';
+                document.body.style.overflow = 'auto';
+                console.log('Modal verificado novamente e fechado');
+                
+                // OBSERVADOR: Detectar se algo tenta mostrar o modal indevidamente
+                const observer = new MutationObserver(function(mutations) {
+                    mutations.forEach(function(mutation) {
+                        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                            if (!modal.classList.contains('hidden')) {
+                                console.log('⚠️ ALERTA: Algo tentou mostrar o modal indevidamente!');
+                                console.log('Avaliações completadas:', Object.keys(evaluationData).length);
+                                if (Object.keys(evaluationData).length < 5) {
+                                    console.log('🚫 Bloqueando modal - não completou 5 avaliações');
+                                    modal.classList.add('hidden');
+                                    modal.style.display = 'none';
+                                    document.body.style.overflow = 'auto';
+                                }
+                            }
+                        }
+                    });
+                });
+                
+                observer.observe(modal, { attributes: true, attributeFilter: ['class'] });
+            }
+            
+            // Verificar se há email salvo, se não, solicitar
+            if (!localStorage.getItem('userEmail')) {
+                setTimeout(() => {
+                    simulateLogin();
+                }, 1000);
+            }
+
             // Definir saldo inicial
             document.getElementById('balance').textContent = `R$ ${currentBalance.toFixed(2)}`;
+
+            // Atualizar badges de recompensa com valores dinâmicos
+            updateRewardBadges();
 
             // Adicionar event listeners para todos os botões
             document.querySelectorAll('.rating-btn, .choice-btn').forEach(btn => {
@@ -781,6 +1081,8 @@
                     this.classList.add('selected');
                 });
             });
+
+
         });
 
         // Função para mostrar animação de dinheiro
@@ -794,9 +1096,11 @@
             const moneyAnimation = document.createElement('div');
             moneyAnimation.className = 'money-animation';
             moneyAnimation.innerHTML = `
-                <div class="money-icon">R$</div>
-                <div class="money-amount">+ R$ 20,00</div>
-                <div class="money-text">Adicionado ao seu saldo</div>
+                <div class="money-icon">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/IFood_logo.svg/1200px-IFood_logo.svg.png" alt="iFood">
+                </div>
+                <div class="money-amount">+ R$ ${currentQuestionReward.toFixed(2)}</div>
+                <div class="money-text">Adicionado ao seu Saldo Ifood</div>
             `;
             document.body.appendChild(moneyAnimation);
 
@@ -882,7 +1186,8 @@
 
                 // Atualizar saldo após um pequeno delay
                 setTimeout(() => {
-                    currentBalance += 20;
+                    // Adicionar o valor da pergunta atual ao saldo
+                    currentBalance += currentQuestionReward;
                     document.getElementById('balance').textContent = `R$ ${currentBalance.toFixed(2)}`;
 
                     // Ocultar card atual
@@ -890,51 +1195,250 @@
 
                     // Mostrar próximo restaurante ou mensagem de conclusão
                     currentRestaurantIndex++;
+                    
                     if (currentRestaurantIndex < restaurants.length) {
+                        // Atualizar o valor da próxima pergunta
+                        currentQuestionReward = questionRewards[currentRestaurantIndex];
+                        
                         const nextCard = document.querySelector(`[data-restaurant="${restaurants[currentRestaurantIndex]}"]`);
                         nextCard.classList.remove('hidden');
                     } else {
-                        // Mostrar mensagem de conclusão
-                        document.getElementById('completion-message').classList.remove('hidden');
-                        document.getElementById('final-balance').textContent = `R$ ${currentBalance.toFixed(2)}`;
-
+                        // Garantir que o saldo final seja exatamente R$ 250,00
+                        currentBalance = 250.00;
+                        document.getElementById('balance').textContent = `R$ ${currentBalance.toFixed(2)}`;
+                        
+                        // Mostrar modal de limite diário APENAS após completar as 5 avaliações
+                        // Este é o ÚNICO momento em que o modal deve aparecer
+                        showDailyLimitModal();
+                        
                         // Salvar dados no localStorage
                         localStorage.setItem('evaluationData', JSON.stringify(evaluationData));
                         localStorage.setItem('currentBalance', currentBalance.toString());
+                        localStorage.setItem('completedEvaluations', '5'); // Marcar como concluído
                     }
+                    
+                    // Salvar saldo atualizado
+                    localStorage.setItem('currentBalance', currentBalance.toString());
                 }, 1000);
 
             }, 1500);
+        }
+
+        // Função para mostrar modal de limite diário
+        function showDailyLimitModal() {
+            // VERIFICAÇÃO EXTRA: Só mostrar se realmente completou 5 avaliações
+            const evaluationCount = Object.keys(evaluationData).length;
+            if (evaluationCount !== 5) {
+                console.log('Modal bloqueado: não completou 5 avaliações ainda');
+                return;
+            }
+
+            const modal = document.getElementById('daily-limit-modal');
+            const modalBalance = document.getElementById('modal-balance');
+
+            modalBalance.textContent = `R$ ${currentBalance.toFixed(2)}`;
+            
+            // Remover todas as classes e estilos que podem estar escondendo
+            modal.classList.remove('hidden');
+            modal.style.display = 'flex';
+            modal.style.visibility = 'visible';
+            modal.style.opacity = '1';
+
+            // Adicionar efeito de blur no fundo
+            document.body.style.overflow = 'hidden';
+            
+            console.log('Modal exibido após completar 5 avaliações');
+        }
+
+        // Função para redirecionar para página de saldo
+        function redirectToBalance() {
+            // Salvar dados antes de redirecionar
+            localStorage.setItem('currentBalance', currentBalance.toString());
+            localStorage.setItem('evaluationData', JSON.stringify(evaluationData));
+
+            // Redirecionar para página de saldo
+            window.location.href = '../saque/index.html';
+        }
+
+        // Função para verificar se é um novo usuário (baseado no email)
+        function checkForNewUser() {
+            const currentEmail = localStorage.getItem('userEmail');
+            const lastEmail = localStorage.getItem('lastUserEmail');
+            
+            // Se não há email atual ou é diferente do último, é um novo usuário
+            if (!currentEmail || currentEmail !== lastEmail) {
+                // Fechar modal se estiver aberto
+                const modal = document.getElementById('daily-limit-modal');
+                if (modal) {
+                    modal.classList.add('hidden');
+                    document.body.style.overflow = 'auto';
+                }
+                
+                // Resetar dados para novo usuário
+                localStorage.removeItem('evaluationData');
+                localStorage.removeItem('currentBalance');
+                localStorage.removeItem('completedEvaluations');
+                localStorage.removeItem('questionRewards');
+                localStorage.removeItem('lastAccessDate');
+                
+                // Salvar o email atual como último email usado
+                if (currentEmail) {
+                    localStorage.setItem('lastUserEmail', currentEmail);
+                }
+                
+                // Gerar novos valores para o novo usuário
+                currentBalance = generateInitialBalance();
+                questionRewards = generateRandomRewards(currentBalance);
+                completedEvaluations = 0;
+                currentRestaurantIndex = 0;
+                
+                // Salvar os novos valores
+                localStorage.setItem('currentBalance', currentBalance.toString());
+                localStorage.setItem('questionRewards', JSON.stringify(questionRewards));
+                
+                return true; // É um novo usuário
+            }
+            
+            return false; // Mesmo usuário
+        }
+
+        // Função para inicializar valores se não existirem
+        function initializeValues() {
+            // Se não há valores salvos, gerar novos
+            if (!localStorage.getItem('questionRewards')) {
+                currentBalance = generateInitialBalance();
+                questionRewards = generateRandomRewards(currentBalance);
+                
+                localStorage.setItem('currentBalance', currentBalance.toString());
+                localStorage.setItem('questionRewards', JSON.stringify(questionRewards));
+            }
+        }
+
+        // Função para gerar novos valores a cada acesso (opcional)
+        function generateNewValuesOnAccess() {
+            // Verificar se deve gerar novos valores (por exemplo, a cada novo dia)
+            const lastAccess = localStorage.getItem('lastAccessDate');
+            const today = new Date().toDateString();
+            
+            if (lastAccess !== today) {
+                // Novo dia, gerar novos valores apenas se não há avaliações em progresso
+                const savedEvaluations = localStorage.getItem('evaluationData');
+                if (!savedEvaluations || Object.keys(JSON.parse(savedEvaluations)).length === 0) {
+                    currentBalance = generateInitialBalance();
+                    questionRewards = generateRandomRewards(currentBalance);
+                    
+                    localStorage.setItem('currentBalance', currentBalance.toString());
+                    localStorage.setItem('questionRewards', JSON.stringify(questionRewards));
+                    localStorage.setItem('lastAccessDate', today);
+                }
+            }
+        }
+
+        // Verificar se é um novo usuário
+        const isNewUser = checkForNewUser();
+
+        // Se é um novo usuário, resetar interface
+        if (isNewUser) {
+            resetInterfaceForNewUser();
+        } else {
+            // Inicializar valores se necessário
+            initializeValues();
+            generateNewValuesOnAccess(); // Gerar novos valores a cada acesso
         }
 
         // Carregar dados salvos
         const savedBalance = localStorage.getItem('currentBalance');
         if (savedBalance) {
             currentBalance = parseFloat(savedBalance);
-            document.getElementById('balance').textContent = `R$ ${currentBalance.toFixed(2)}`;
         }
 
-        const savedEvaluations = localStorage.getItem('evaluationData');
-        if (savedEvaluations) {
-            const data = JSON.parse(savedEvaluations);
-            const completedCount = Object.keys(data).length;
+        const savedRewards = localStorage.getItem('questionRewards');
+        if (savedRewards) {
+            questionRewards = JSON.parse(savedRewards);
+        }
 
-            if (completedCount >= 5) {
-                // Todas as avaliações foram concluídas
-                document.querySelectorAll('.restaurant-card').forEach(card => {
-                    card.classList.add('hidden');
-                });
-                document.getElementById('completion-message').classList.remove('hidden');
-                document.getElementById('final-balance').textContent = `R$ ${currentBalance.toFixed(2)}`;
-            } else {
-                // Mostrar próximo restaurante a ser avaliado
-                currentRestaurantIndex = completedCount;
-                if (currentRestaurantIndex > 0) {
-                    document.querySelector(`[data-restaurant="${restaurants[0]}"]`).classList.add('hidden');
+        // NUNCA mostrar o modal automaticamente ao carregar a página
+        // O modal só deve aparecer após completar as 5 avaliações no fluxo atual
+        
+        if (!isNewUser) {
+            const savedEvaluations = localStorage.getItem('evaluationData');
+            if (savedEvaluations) {
+                try {
+                    const data = JSON.parse(savedEvaluations);
+                    const completedCount = Object.keys(data).length;
+                    
+                    // IMPORTANTE: Nunca mostrar modal automaticamente, mesmo com 5 avaliações
+                    // O modal só aparece quando o usuário completa a 5ª avaliação no fluxo
+                    
+                    if (completedCount > 0 && completedCount < 5) {
+                        // Mostrar próximo restaurante a ser avaliado
+                        currentRestaurantIndex = completedCount;
+                        if (currentRestaurantIndex > 0) {
+                            document.querySelector(`[data-restaurant="${restaurants[0]}"]`).classList.add('hidden');
+                        }
+                        document.querySelector(`[data-restaurant="${restaurants[currentRestaurantIndex]}"]`).classList.remove('hidden');
+                    } else if (completedCount >= 5) {
+                        // Se já completou tudo, resetar para permitir novo ciclo
+                        localStorage.removeItem('evaluationData');
+                        localStorage.removeItem('completedEvaluations');
+                        currentRestaurantIndex = 0;
+                        // Mostrar primeiro restaurante
+                        document.querySelectorAll('.restaurant-card').forEach((card, index) => {
+                            if (index === 0) {
+                                card.classList.remove('hidden');
+                            } else {
+                                card.classList.add('hidden');
+                            }
+                        });
+                    }
+                } catch (e) {
+                    console.error('Erro ao processar dados salvos:', e);
+                    // Em caso de erro, começar do zero
+                    currentRestaurantIndex = 0;
+                    document.querySelectorAll('.restaurant-card').forEach((card, index) => {
+                        if (index === 0) {
+                            card.classList.remove('hidden');
+                        } else {
+                            card.classList.add('hidden');
+                        }
+                    });
                 }
-                document.querySelector(`[data-restaurant="${restaurants[currentRestaurantIndex]}"]`).classList.remove('hidden');
             }
         }
+        
+        // Garantir que sempre começa do primeiro restaurante para novos usuários
+        if (isNewUser || currentRestaurantIndex === 0) {
+            document.querySelectorAll('.restaurant-card').forEach((card, index) => {
+                if (index === 0) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        }
+
+        // Definir o valor da pergunta atual
+        if (questionRewards.length > 0 && currentRestaurantIndex < questionRewards.length) {
+            currentQuestionReward = questionRewards[currentRestaurantIndex];
+        }
+
+        // Debug: Verificar valores gerados
+        console.log('=== DEBUG INFO ===');
+        console.log('É novo usuário:', isNewUser);
+        console.log('Email atual:', localStorage.getItem('userEmail'));
+        console.log('Último email:', localStorage.getItem('lastUserEmail'));
+        console.log('Dados de avaliação:', localStorage.getItem('evaluationData'));
+        console.log('Índice do restaurante atual:', currentRestaurantIndex);
+        console.log('Saldo inicial:', currentBalance);
+        console.log('Valores das perguntas:', questionRewards);
+        if (questionRewards.length > 0) {
+            const totalSum = currentBalance + questionRewards.reduce((a, b) => a + b, 0);
+            console.log('Soma total:', totalSum);
+            console.log('Deve ser 250.00:', totalSum === 250.00 ? '✅ CORRETO' : '❌ ERRO - Diferença:', (totalSum - 250.00).toFixed(2));
+        }
+
+        // Sempre atualizar o saldo na interface
+        document.getElementById('balance').textContent = `R$ ${currentBalance.toFixed(2)}`;
     </script>
 </body>
 
