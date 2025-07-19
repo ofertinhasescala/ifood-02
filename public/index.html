@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Preload da logo -->
+    <link rel="preload" as="image" href="images/ifood-creditos-logo.jpeg">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/d0507d7869aaf463.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicons -->
+    <link rel="icon" href="images/favicon.ico" sizes="any">
+    <link rel="icon" href="images/favicon-16x16.png" type="image/png" sizes="16x16">
+    <link rel="icon" href="images/favicon-32x32.png" type="image/png" sizes="32x32">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    
+    <!-- Meta tags -->
+    <title>iFood Benefícios - Avalie restaurantes e ganhe recompensas</title>
+    <meta name="description" content="Avalie restaurantes parceiros do iFood e ganhe recompensas.">
+    <meta name="author" content="iFood Benefícios">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 24px;
+            padding: 48px 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .logo {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 32px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(235, 40, 52, 0.2);
+        }
+        
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+            line-height: 1.2;
+        }
+        
+        .subtitle {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 40px;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+        
+        .form {
+            margin-bottom: 32px;
+        }
+        
+        .input-group {
+            margin-bottom: 24px;
+        }
+        
+        .input {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid #e5e5e5;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 500;
+            background: #fafafa;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+        
+        .input:focus {
+            border-color: #EB2834;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(235, 40, 52, 0.1);
+        }
+        
+        .input::placeholder {
+            color: #999;
+            font-weight: 400;
+        }
+        
+        .button {
+            width: 100%;
+            padding: 18px 24px;
+            background: #EB2834;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+        
+        .button:hover {
+            background: #d91e2a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(235, 40, 52, 0.3);
+        }
+        
+        .button:active {
+            transform: translateY(0);
+        }
+        
+        .button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .footer {
+            color: #999;
+            font-size: 14px;
+            font-weight: 400;
+        }
+        
+        /* Animações suaves */
+        .container {
+            animation: slideUp 0.6s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsividade */
+        @media (max-width: 480px) {
+            .container {
+                padding: 36px 24px;
+                border-radius: 20px;
+            }
+            
+            .title {
+                font-size: 28px;
+            }
+            
+            .subtitle {
+                font-size: 16px;
+            }
+            
+            .logo {
+                width: 80px;
+                height: 80px;
+                margin-bottom: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Logo -->
+        <div class="logo">
+            <img 
+                alt="iFood Benefícios" 
+                src="images/ifood-creditos-logo.jpeg"
+            >
+        </div>
+        
+        <!-- Título -->
+        <h1 class="title">iFood Benefícios</h1>
+        
+        <!-- Subtítulo -->
+        <p class="subtitle">
+            Avalie restaurantes parceiros e ganhe recompensas
+        </p>
+        
+        <!-- Formulário -->
+        <form class="form" action="/dashboard" method="GET">
+            <div class="input-group">
+                <input 
+                    type="email" 
+                    name="email"
+                    class="input"
+                    id="email" 
+                    placeholder="Digite seu e-mail" 
+                    required 
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                >
+            </div>
+            
+            <button 
+                class="button"
+                type="submit"
+                id="submitBtn"
+            >
+                Começar agora
+            </button>
+        </form>
+        
+        <!-- Footer -->
+        <div class="footer">
+            © 2025 iFood Benefícios
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('.form');
+            const button = document.getElementById('submitBtn');
+            
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = document.getElementById('email').value;
+                
+                if (email) {
+                    // Estado de loading
+                    button.textContent = 'Processando...';
+                    button.disabled = true;
+                    
+                    // Salvar email
+                    localStorage.setItem('userEmail', email);
+                    
+                    // Redirecionar após delay
+                    setTimeout(() => {
+                        window.location.href = '/dashboard';
+                    }, 1000);
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

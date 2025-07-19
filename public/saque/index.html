@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicons -->
+    <link rel="icon" href="../images/favicon.ico" sizes="any">
+    <link rel="icon" href="../images/favicon-16x16.png" type="image/png" sizes="16x16">
+    <link rel="icon" href="../images/favicon-32x32.png" type="image/png" sizes="32x32">
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
+    
+    <!-- Meta Tags -->
+    <title>Saque - iFood Benefícios</title>
+    <meta name="description" content="Realize o saque dos seus créditos iFood Benefícios">
+    <meta name="author" content="iFood Benefícios">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        body {
+            background: #f8f9fa;
+            min-height: 100vh;
+            padding-bottom: 100px;
+        }
+        
+        .header {
+            background: white;
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo {
+            height: 32px;
+            border-radius: 8px;
+        }
+        
+        .balance {
+            background: #EB2834;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            padding: 24px;
+        }
+        
+        .page-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+        
+        .page-subtitle {
+            font-size: 16px;
+            color: #666;
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        
+        .balance-display {
+            background: linear-gradient(135deg, #EB2834 0%, #d91e2a 100%);
+            color: white;
+            padding: 32px 24px;
+            border-radius: 16px;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        
+        .balance-label {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 8px;
+        }
+        
+        .balance-amount {
+            font-size: 32px;
+            font-weight: 700;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            display: block;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 500;
+            background: #fafafa;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+        
+        .form-input:focus {
+            border-color: #EB2834;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(235, 40, 52, 0.1);
+        }
+        
+        .form-input::placeholder {
+            color: #999;
+            font-weight: 400;
+        }
+        
+        .withdraw-btn {
+            width: 100%;
+            padding: 16px;
+            background: #EB2834;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 16px;
+        }
+        
+        .withdraw-btn:hover {
+            background: #d91e2a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(235, 40, 52, 0.3);
+        }
+        
+        .withdraw-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .info-text {
+            font-size: 14px;
+            color: #666;
+            text-align: center;
+            line-height: 1.4;
+        }
+        
+        .navigation {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 16px;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+        
+        .nav-items {
+            display: flex;
+            justify-content: space-around;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #999;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-item.active {
+            color: #EB2834;
+        }
+        
+        .nav-icon {
+            width: 40px;
+            height: 40px;
+            background: #f0f0f0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 4px;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-item.active .nav-icon {
+            background: #EB2834;
+            color: white;
+        }
+        
+        .nav-label {
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        /* Animações */
+        .card {
+            animation: slideUp 0.5s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 16px;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 16px;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <img src="../images/ifood-creditos-logo.jpeg" alt="iFood Benefícios" class="logo">
+        <div class="balance" id="balance">R$ 100,00</div>
+    </div>
+    
+    <!-- Container -->
+    <div class="container">
+        <div class="card">
+            <h1 class="page-title">Saque</h1>
+            <p class="page-subtitle">Realize o saque dos seus créditos</p>
+            
+            <!-- Saldo disponível -->
+            <div class="balance-display">
+                <div class="balance-label">Saldo disponível</div>
+                <div class="balance-amount" id="available-balance">R$ 100,00</div>
+            </div>
+            
+            <!-- Mensagens -->
+            <div class="success-message" id="success-message">
+                Saque realizado com sucesso! O valor será creditado em até 2 dias úteis.
+            </div>
+            
+            <div class="error-message" id="error-message">
+                Erro ao processar o saque. Verifique os dados e tente novamente.
+            </div>
+            
+            <!-- Formulário de saque -->
+            <form id="withdraw-form">
+                <div class="form-group">
+                    <label class="form-label" for="amount">Valor do saque</label>
+                    <input 
+                        type="number" 
+                        id="amount" 
+                        name="amount"
+                        class="form-input"
+                        placeholder="R$ 0,00"
+                        min="10"
+                        max="1000"
+                        step="0.01"
+                        required
+                    >
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="pix-key">Chave PIX</label>
+                    <input 
+                        type="text" 
+                        id="pix-key" 
+                        name="pix-key"
+                        class="form-input"
+                        placeholder="CPF, telefone, email ou chave aleatória"
+                        required
+                    >
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="confirm-pix">Confirmar chave PIX</label>
+                    <input 
+                        type="text" 
+                        id="confirm-pix" 
+                        name="confirm-pix"
+                        class="form-input"
+                        placeholder="Digite novamente sua chave PIX"
+                        required
+                    >
+                </div>
+                
+                <button type="submit" class="withdraw-btn" id="withdraw-btn">
+                    Solicitar Saque
+                </button>
+            </form>
+            
+            <p class="info-text">
+                • Valor mínimo: R$ 10,00<br>
+                • Valor máximo: R$ 1.000,00<br>
+                • Processamento: até 2 dias úteis
+            </p>
+        </div>
+    </div>
+    
+    <!-- Bottom Navigation -->
+    <div class="navigation">
+        <div class="nav-items">
+            <a href="../saque/" class="nav-item active">
+                <div class="nav-icon">$</div>
+                <div class="nav-label">Sacar</div>
+            </a>
+            <a href="../dashboard/" class="nav-item">
+                <div class="nav-icon">🏠</div>
+                <div class="nav-label">Avaliar</div>
+            </a>
+            <a href="../faq/" class="nav-item">
+                <div class="nav-icon">?</div>
+                <div class="nav-label">Dúvidas</div>
+            </a>
+        </div>
+    </div>
+    
+    <script>
+        let currentBalance = 100; // Saldo inicial
+        
+        // Carregar saldo salvo
+        const savedBalance = localStorage.getItem('currentBalance');
+        if (savedBalance) {
+            currentBalance = parseFloat(savedBalance);
+        }
+        
+        // Atualizar interface com saldo atual
+        function updateBalance() {
+            document.getElementById('balance').textContent = `R$ ${currentBalance.toFixed(2)}`;
+            document.getElementById('available-balance').textContent = `R$ ${currentBalance.toFixed(2)}`;
+            document.getElementById('amount').max = currentBalance.toString();
+        }
+        
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', function() {
+            updateBalance();
+            
+            // Event listener para o formulário
+            document.getElementById('withdraw-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const amount = parseFloat(document.getElementById('amount').value);
+                const pixKey = document.getElementById('pix-key').value.trim();
+                const confirmPix = document.getElementById('confirm-pix').value.trim();
+                
+                // Validações
+                if (amount < 10) {
+                    showError('Valor mínimo para saque é R$ 10,00');
+                    return;
+                }
+                
+                if (amount > currentBalance) {
+                    showError('Saldo insuficiente para este valor');
+                    return;
+                }
+                
+                if (pixKey !== confirmPix) {
+                    showError('As chaves PIX não coincidem');
+                    return;
+                }
+                
+                if (pixKey.length < 3) {
+                    showError('Insira uma chave PIX válida');
+                    return;
+                }
+                
+                // Processar saque
+                processWithdraw(amount);
+            });
+        });
+        
+        function processWithdraw(amount) {
+            const btn = document.getElementById('withdraw-btn');
+            btn.textContent = 'Processando...';
+            btn.disabled = true;
+            
+            // Simular processamento
+            setTimeout(() => {
+                // Atualizar saldo
+                currentBalance -= amount;
+                localStorage.setItem('currentBalance', currentBalance.toString());
+                updateBalance();
+                
+                // Mostrar sucesso
+                showSuccess();
+                
+                // Limpar formulário
+                document.getElementById('withdraw-form').reset();
+                
+                // Restaurar botão
+                btn.textContent = 'Solicitar Saque';
+                btn.disabled = false;
+                
+            }, 2000);
+        }
+        
+        function showSuccess() {
+            document.getElementById('success-message').style.display = 'block';
+            document.getElementById('error-message').style.display = 'none';
+            
+            setTimeout(() => {
+                document.getElementById('success-message').style.display = 'none';
+            }, 5000);
+        }
+        
+        function showError(message) {
+            document.getElementById('error-message').textContent = message;
+            document.getElementById('error-message').style.display = 'block';
+            document.getElementById('success-message').style.display = 'none';
+            
+            setTimeout(() => {
+                document.getElementById('error-message').style.display = 'none';
+            }, 5000);
+        }
+    </script>
+</body>
+</html>

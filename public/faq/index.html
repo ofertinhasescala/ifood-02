@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicons -->
+    <link rel="icon" href="../images/favicon.ico" sizes="any">
+    <link rel="icon" href="../images/favicon-16x16.png" type="image/png" sizes="16x16">
+    <link rel="icon" href="../images/favicon-32x32.png" type="image/png" sizes="32x32">
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
+    
+    <!-- Meta Tags -->
+    <title>Perguntas Frequentes - iFood Benefícios</title>
+    <meta name="description" content="Tire suas dúvidas sobre o iFood Benefícios">
+    <meta name="author" content="iFood Benefícios">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        body {
+            background: #f5f5f5;
+            min-height: 100vh;
+            padding-bottom: 100px;
+        }
+        
+        .header {
+            background: white;
+            padding: 32px 20px;
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 24px;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(235, 40, 52, 0.2);
+        }
+        
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .page-title {
+            font-size: 32px;
+            font-weight: 600;
+            color: #eb2834;
+            margin-bottom: 8px;
+        }
+        
+        .page-subtitle {
+            font-size: 16px;
+            color: #666;
+            font-weight: 400;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .faq-item {
+            background: white;
+            border-radius: 16px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-item:hover {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+        }
+        
+        .faq-question {
+            padding: 24px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            border: none;
+            width: 100%;
+            text-align: left;
+            font-size: 16px;
+            font-weight: 500;
+            color: #333;
+            transition: background-color 0.3s ease;
+        }
+        
+        .faq-question:hover {
+            background: #f8f9fa;
+        }
+        
+        .faq-question.active {
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .faq-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-icon.active {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .faq-answer.active {
+            max-height: 300px;
+        }
+        
+        .faq-answer-content {
+            padding: 0 24px 24px;
+            color: #666;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        
+        .faq-answer-content ul {
+            margin: 12px 0;
+            padding-left: 20px;
+        }
+        
+        .faq-answer-content li {
+            margin-bottom: 8px;
+        }
+        
+        .faq-answer-content strong {
+            color: #333;
+            font-weight: 600;
+        }
+        
+        .highlight {
+            color: #EB2834;
+            font-weight: 600;
+        }
+        
+        .navigation {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 16px;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+        
+        .nav-items {
+            display: flex;
+            justify-content: space-around;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #999;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-item.active {
+            color: #EB2834;
+        }
+        
+        .nav-icon {
+            width: 40px;
+            height: 40px;
+            background: #f0f0f0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 4px;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-item.active .nav-icon {
+            background: #EB2834;
+            color: white;
+        }
+        
+        .nav-label {
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        /* Animações */
+        .container {
+            animation: fadeIn 0.6s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .header {
+                padding: 24px 20px;
+            }
+            
+            .logo {
+                width: 80px;
+                height: 80px;
+                margin-bottom: 16px;
+            }
+            
+            .page-title {
+                font-size: 24px;
+            }
+            
+            .faq-question {
+                padding: 20px;
+                font-size: 15px;
+            }
+            
+            .faq-answer-content {
+                padding: 0 20px 20px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="logo">
+            <img src="../images/ifood-creditos-logo.jpeg" alt="iFood Benefícios">
+        </div>
+        <h1 class="page-title">Perguntas frequentes</h1>
+        <p class="page-subtitle">Tire suas dúvidas sobre o iFood Benefícios</p>
+    </div>
+    
+    <!-- Container -->
+    <div class="container">
+        <!-- FAQ 1 -->
+        <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+                <span>Como funciona o sistema de avaliações?</span>
+                <div class="faq-icon">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                    </svg>
+                </div>
+            </button>
+            <div class="faq-answer">
+                <div class="faq-answer-content">
+                    <p>O iFood Benefícios é simples e rápido:</p>
+                    <ul>
+                        <li><strong>Avalie</strong> restaurantes parceiros do iFood</li>
+                        <li><strong>Responda</strong> 3 perguntas sobre cada restaurante</li>
+                        <li><strong>Ganhe</strong> <span class="highlight">R$ 20,00</span> por avaliação completa</li>
+                        <li><strong>Acumule</strong> créditos e faça saques</li>
+                    </ul>
+                    <p>Você inicia com <span class="highlight">R$ 100,00</span> e pode ganhar até <span class="highlight">R$ 200,00</span> avaliando 5 restaurantes!</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- FAQ 2 -->
+        <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+                <span>Em quanto tempo vou receber?</span>
+                <div class="faq-icon">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                    </svg>
+                </div>
+            </button>
+            <div class="faq-answer">
+                <div class="faq-answer-content">
+                    <p>Os pagamentos são processados rapidamente:</p>
+                    <ul>
+                        <li><strong>Saques normais:</strong> até 2 dias úteis</li>
+                        <li><strong>Saques premium:</strong> instantâneo (para usuários premium)</li>
+                        <li><strong>Processamento:</strong> via PIX para maior agilidade</li>
+                    </ul>
+                    <p>Todos os saques são processados de segunda a sexta-feira, em dias úteis.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- FAQ 3 -->
+        <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+                <span>Quantas vezes posso sacar por dia?</span>
+                <div class="faq-icon">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                    </svg>
+                </div>
+            </button>
+            <div class="faq-answer">
+                <div class="faq-answer-content">
+                    <p>Limites de saque por dia:</p>
+                    <ul>
+                        <li><strong>Usuários normais:</strong> 1 saque por dia</li>
+                        <li><strong>Usuários premium:</strong> saques ilimitados</li>
+                        <li><strong>Valor mínimo:</strong> R$ 10,00</li>
+                        <li><strong>Valor máximo:</strong> R$ 1.000,00 por saque</li>
+                    </ul>
+                    <p>Para aumentar seus limites, considere fazer upgrade para o <span class="highlight">iFood Benefícios Premium</span>.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- FAQ 4 -->
+        <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+                <span>Preciso pagar alguma taxa?</span>
+                <div class="faq-icon">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                    </svg>
+                </div>
+            </button>
+            <div class="faq-answer">
+                <div class="faq-answer-content">
+                    <p>O iFood Benefícios é <strong>100% gratuito</strong> para usar:</p>
+                    <ul>
+                        <li><strong>Cadastro:</strong> gratuito</li>
+                        <li><strong>Avaliações:</strong> gratuitas</li>
+                        <li><strong>Saques:</strong> sem taxa para usuários normais</li>
+                        <li><strong>Premium:</strong> pagamento único de R$ 29,90 (opcional)</li>
+                    </ul>
+                    <p>Não cobramos taxas escondidas. Você recebe exatamente o valor que sacar.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- FAQ 5 -->
+        <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+                <span>O que é o iFood Benefícios Premium?</span>
+                <div class="faq-icon">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                    </svg>
+                </div>
+            </button>
+            <div class="faq-answer">
+                <div class="faq-answer-content">
+                    <p>O Premium desbloqueia benefícios exclusivos:</p>
+                    <ul>
+                        <li><strong>Avaliações duplas:</strong> ganhe R$ 40,00 por avaliação</li>
+                        <li><strong>Restaurantes exclusivos:</strong> acesso a redes premium</li>
+                        <li><strong>Bonus diário:</strong> R$ 10,00 extras por dia</li>
+                        <li><strong>Saque instantâneo:</strong> receba na hora</li>
+                        <li><strong>Suporte prioritário:</strong> atendimento VIP 24/7</li>
+                    </ul>
+                    <p>Investimento único de <span class="highlight">R$ 29,90</span> com garantia de 30 dias.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- FAQ 6 -->
+        <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+                <span>Como uso a chave PIX para saque?</span>
+                <div class="faq-icon">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                    </svg>
+                </div>
+            </button>
+            <div class="faq-answer">
+                <div class="faq-answer-content">
+                    <p>Aceitamos todos os tipos de chave PIX:</p>
+                    <ul>
+                        <li><strong>CPF:</strong> digite apenas os números</li>
+                        <li><strong>Telefone:</strong> com código do país (+55)</li>
+                        <li><strong>E-mail:</strong> endereço completo</li>
+                        <li><strong>Chave aleatória:</strong> códigos únicos do seu banco</li>
+                    </ul>
+                    <p>Certifique-se de digitar a chave corretamente para evitar problemas no recebimento.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- FAQ 7 -->
+        <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+                <span>Posso avaliar o mesmo restaurante várias vezes?</span>
+                <div class="faq-icon">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                    </svg>
+                </div>
+            </button>
+            <div class="faq-answer">
+                <div class="faq-answer-content">
+                    <p>Cada restaurante pode ser avaliado <strong>uma vez por usuário</strong>:</p>
+                    <ul>
+                        <li><strong>5 restaurantes disponíveis:</strong> McDonald's, Burger King, Subway, Outback, Pizza Hut</li>
+                        <li><strong>1 avaliação por restaurante:</strong> R$ 20,00 cada</li>
+                        <li><strong>Total máximo:</strong> R$ 200,00 (R$ 100,00 inicial + R$ 100,00 em avaliações)</li>
+                    </ul>
+                    <p>Usuários premium têm acesso a restaurantes exclusivos e podem ganhar mais.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- FAQ 8 -->
+        <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+                <span>Meus dados estão seguros?</span>
+                <div class="faq-icon">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                    </svg>
+                </div>
+            </button>
+            <div class="faq-answer">
+                <div class="faq-answer-content">
+                    <p>Sua segurança é nossa prioridade:</p>
+                    <ul>
+                        <li><strong>Dados criptografados:</strong> proteção end-to-end</li>
+                        <li><strong>Sem compartilhamento:</strong> seus dados não são vendidos</li>
+                        <li><strong>Conformidade LGPD:</strong> seguimos todas as normas</li>
+                        <li><strong>Servidores seguros:</strong> infraestrutura protegida</li>
+                    </ul>
+                    <p>Coletamos apenas o essencial: e-mail e chave PIX para pagamentos.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bottom Navigation -->
+    <div class="navigation">
+        <div class="nav-items">
+            <a href="../saque/" class="nav-item">
+                <div class="nav-icon">$</div>
+                <div class="nav-label">Sacar</div>
+            </a>
+            <a href="../dashboard/" class="nav-item">
+                <div class="nav-icon">🏠</div>
+                <div class="nav-label">Avaliar</div>
+            </a>
+            <a href="../faq/" class="nav-item active">
+                <div class="nav-icon">?</div>
+                <div class="nav-label">Dúvidas</div>
+            </a>
+        </div>
+    </div>
+    
+    <script>
+        function toggleFAQ(element) {
+            const faqItem = element.parentElement;
+            const answer = faqItem.querySelector('.faq-answer');
+            const icon = element.querySelector('.faq-icon');
+            
+            // Fechar todas as outras FAQs
+            const allFAQs = document.querySelectorAll('.faq-item');
+            allFAQs.forEach(item => {
+                if (item !== faqItem) {
+                    const otherAnswer = item.querySelector('.faq-answer');
+                    const otherQuestion = item.querySelector('.faq-question');
+                    const otherIcon = item.querySelector('.faq-icon');
+                    
+                    otherAnswer.classList.remove('active');
+                    otherQuestion.classList.remove('active');
+                    otherIcon.classList.remove('active');
+                }
+            });
+            
+            // Toggle da FAQ atual
+            const isActive = answer.classList.contains('active');
+            
+            if (isActive) {
+                answer.classList.remove('active');
+                element.classList.remove('active');
+                icon.classList.remove('active');
+            } else {
+                answer.classList.add('active');
+                element.classList.add('active');
+                icon.classList.add('active');
+            }
+        }
+        
+        // Animação suave ao carregar
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach((item, index) => {
+                setTimeout(() => {
+                    item.style.opacity = '0';
+                    item.style.transform = 'translateY(20px)';
+                    item.style.transition = 'all 0.4s ease';
+                    
+                    setTimeout(() => {
+                        item.style.opacity = '1';
+                        item.style.transform = 'translateY(0)';
+                    }, 50);
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>

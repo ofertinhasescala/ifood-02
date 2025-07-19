@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicons -->
+    <link rel="icon" href="../images/favicon.ico" sizes="any">
+    <link rel="icon" href="../images/favicon-16x16.png" type="image/png" sizes="16x16">
+    <link rel="icon" href="../images/favicon-32x32.png" type="image/png" sizes="32x32">
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
+    
+    <!-- Meta Tags -->
+    <title>Desbloqueio - iFood Benefícios</title>
+    <meta name="description" content="Desbloqueie funcionalidades premium do iFood Benefícios">
+    <meta name="author" content="iFood Benefícios">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        body {
+            background: #f8f9fa;
+            min-height: 100vh;
+            padding-bottom: 100px;
+        }
+        
+        .header {
+            background: white;
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo {
+            height: 32px;
+            border-radius: 8px;
+        }
+        
+        .balance {
+            background: #EB2834;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            padding: 24px;
+        }
+        
+        .page-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+        
+        .page-subtitle {
+            font-size: 16px;
+            color: #666;
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        
+        .unlock-icon {
+            font-size: 48px;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        
+        .feature-card {
+            background: linear-gradient(135deg, #EB2834 0%, #d91e2a 100%);
+            color: white;
+            padding: 24px;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .feature-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        .feature-description {
+            font-size: 14px;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+        
+        .benefits-list {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 24px;
+        }
+        
+        .benefits-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .benefits-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .benefit-icon {
+            width: 24px;
+            height: 24px;
+            background: #EB2834;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 12px;
+            color: white;
+        }
+        
+        .unlock-btn {
+            width: 100%;
+            padding: 16px;
+            background: #EB2834;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 16px;
+        }
+        
+        .unlock-btn:hover {
+            background: #d91e2a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(235, 40, 52, 0.3);
+        }
+        
+        .unlock-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .info-text {
+            font-size: 14px;
+            color: #666;
+            text-align: center;
+            line-height: 1.4;
+        }
+        
+        .navigation {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 16px;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+        
+        .nav-items {
+            display: flex;
+            justify-content: space-around;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #999;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-item.active {
+            color: #EB2834;
+        }
+        
+        .nav-icon {
+            width: 40px;
+            height: 40px;
+            background: #f0f0f0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 4px;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-item.active .nav-icon {
+            background: #EB2834;
+            color: white;
+        }
+        
+        .nav-label {
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        /* Animações */
+        .card {
+            animation: slideUp 0.5s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .unlocked-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 24px;
+            border-radius: 16px;
+            text-align: center;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .unlocked-message h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+        
+        .unlocked-message p {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <img src="../images/ifood-creditos-logo.jpeg" alt="iFood Benefícios" class="logo">
+        <div class="balance" id="balance">R$ 100,00</div>
+    </div>
+    
+    <!-- Container -->
+    <div class="container">
+        <div class="card">
+            <h1 class="page-title">Desbloqueio Premium</h1>
+            <p class="page-subtitle">Acesse funcionalidades exclusivas</p>
+            
+            <div class="unlock-icon">🔓</div>
+            
+            <!-- Mensagem de desbloqueio -->
+            <div class="unlocked-message" id="unlocked-message">
+                <h3>🎉 Parabéns!</h3>
+                <p>Funcionalidades premium desbloqueadas com sucesso!</p>
+            </div>
+            
+            <!-- Recursos premium -->
+            <div class="feature-card">
+                <div class="feature-title">iFood Benefícios Premium</div>
+                <div class="feature-description">
+                    Desbloqueie recursos exclusivos para maximizar seus ganhos
+                </div>
+            </div>
+            
+            <!-- Lista de benefícios -->
+            <ul class="benefits-list">
+                <li>
+                    <div class="benefit-icon">⚡</div>
+                    <div>
+                        <strong>Avaliações duplas</strong><br>
+                        <small>Ganhe R$ 40,00 por avaliação completa</small>
+                    </div>
+                </li>
+                <li>
+                    <div class="benefit-icon">🎯</div>
+                    <div>
+                        <strong>Restaurantes exclusivos</strong><br>
+                        <small>Acesso a avaliações de redes premium</small>
+                    </div>
+                </li>
+                <li>
+                    <div class="benefit-icon">💎</div>
+                    <div>
+                        <strong>Bonus diário</strong><br>
+                        <small>R$ 10,00 extras por dia de uso</small>
+                    </div>
+                </li>
+                <li>
+                    <div class="benefit-icon">🚀</div>
+                    <div>
+                        <strong>Saque instantâneo</strong><br>
+                        <small>Receba seus créditos na hora</small>
+                    </div>
+                </li>
+                <li>
+                    <div class="benefit-icon">👑</div>
+                    <div>
+                        <strong>Suporte prioritário</strong><br>
+                        <small>Atendimento VIP 24/7</small>
+                    </div>
+                </li>
+            </ul>
+            
+            <button class="unlock-btn" id="unlock-btn" onclick="unlockPremium()">
+                Desbloquear Premium - R$ 29,90
+            </button>
+            
+            <p class="info-text">
+                • Pagamento único vitalício<br>
+                • Garantia de 30 dias<br>
+                • Suporte premium incluído
+            </p>
+        </div>
+    </div>
+    
+    <!-- Bottom Navigation -->
+    <div class="navigation">
+        <div class="nav-items">
+            <a href="../saque/" class="nav-item">
+                <div class="nav-icon">$</div>
+                <div class="nav-label">Sacar</div>
+            </a>
+            <a href="../dashboard/" class="nav-item">
+                <div class="nav-icon">🏠</div>
+                <div class="nav-label">Avaliar</div>
+            </a>
+            <a href="../faq/" class="nav-item">
+                <div class="nav-icon">?</div>
+                <div class="nav-label">Dúvidas</div>
+            </a>
+        </div>
+    </div>
+    
+    <script>
+        let currentBalance = 100; // Saldo inicial
+        
+        // Carregar saldo salvo
+        const savedBalance = localStorage.getItem('currentBalance');
+        if (savedBalance) {
+            currentBalance = parseFloat(savedBalance);
+        }
+        
+        // Atualizar interface com saldo atual
+        function updateBalance() {
+            document.getElementById('balance').textContent = `R$ ${currentBalance.toFixed(2)}`;
+        }
+        
+        // Verificar se já tem premium
+        function checkPremiumStatus() {
+            const isPremium = localStorage.getItem('isPremium') === 'true';
+            if (isPremium) {
+                document.getElementById('unlock-btn').style.display = 'none';
+                document.getElementById('unlocked-message').style.display = 'block';
+            }
+        }
+        
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', function() {
+            updateBalance();
+            checkPremiumStatus();
+        });
+        
+        function unlockPremium() {
+            const btn = document.getElementById('unlock-btn');
+            const cost = 29.90;
+            
+            if (currentBalance < cost) {
+                alert('Saldo insuficiente. Você precisa ter pelo menos R$ 29,90 para desbloquear o premium.');
+                return;
+            }
+            
+            // Confirmar compra
+            const confirmed = confirm(`Deseja desbloquear o iFood Benefícios Premium por R$ ${cost.toFixed(2)}?\n\nIsso será debitado do seu saldo atual.`);
+            
+            if (confirmed) {
+                // Processar compra
+                btn.textContent = 'Processando...';
+                btn.disabled = true;
+                
+                setTimeout(() => {
+                    // Debitar do saldo
+                    currentBalance -= cost;
+                    localStorage.setItem('currentBalance', currentBalance.toString());
+                    
+                    // Marcar como premium
+                    localStorage.setItem('isPremium', 'true');
+                    
+                    // Atualizar interface
+                    updateBalance();
+                    
+                    // Mostrar mensagem de sucesso
+                    document.getElementById('unlocked-message').style.display = 'block';
+                    btn.style.display = 'none';
+                    
+                    // Celebração
+                    setTimeout(() => {
+                        alert('🎉 Parabéns! Você agora tem acesso ao iFood Benefícios Premium!\n\n✅ Avaliações duplas ativadas\n✅ Restaurantes exclusivos liberados\n✅ Bonus diário ativado\n✅ Saque instantâneo habilitado\n✅ Suporte prioritário disponível');
+                    }, 1000);
+                    
+                }, 2000);
+            }
+        }
+    </script>
+</body>
+</html>
